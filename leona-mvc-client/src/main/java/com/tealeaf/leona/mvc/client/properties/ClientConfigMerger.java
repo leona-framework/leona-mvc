@@ -20,10 +20,10 @@ class ClientConfigMerger {
     public static <T> T merge(T obj1, T obj2) {
         Class<?> cls = obj1.getClass();
         Method mergeMethod = LINQ.stream(cls.getDeclaredMethods())
-                .firstOrDefault(m -> Modifier.isStatic(m.getModifiers()) && m.getAnnotationsByType(MergeCandidate.MergeMethod.class) != null);
+                .firstOrDefault(m -> Modifier.isStatic(m.getModifiers()) && m.getAnnotation(MergeCandidate.MergeMethod.class) != null);
         if (mergeMethod == null) throw new NoSuchElementException("No valid method annotated with MergeMethod on MergeCandidate class.");
         try {
-            return (T) mergeMethod.invoke(obj1, obj2);
+            return (T) mergeMethod.invoke(null, obj1, obj2);
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }

@@ -5,7 +5,6 @@ import lombok.Data;
 import org.slf4j.event.Level;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import java.util.List;
 import java.util.function.Function;

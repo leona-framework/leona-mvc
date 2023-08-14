@@ -1,13 +1,13 @@
 package com.tealeaf.leona.mvc.client;
 
-import com.tealeaf.leona.mvc.client.properties.BeanBackedClientConfig;
+import com.tealeaf.leona.mvc.client.properties.RestClientConfig;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 @RestClient
 public abstract class GenericRestClient extends ClientExecuter {
-    public GenericRestClient(RestTemplate restTemplate, BeanBackedClientConfig clientConfig) {
+    public GenericRestClient(RestTemplate restTemplate, RestClientConfig clientConfig) {
         super(restTemplate, clientConfig);
     }
 

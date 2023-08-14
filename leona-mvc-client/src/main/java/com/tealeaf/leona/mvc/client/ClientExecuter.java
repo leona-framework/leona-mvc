@@ -1,14 +1,15 @@
 package com.tealeaf.leona.mvc.client;
 
-import com.tealeaf.leona.mvc.client.properties.BeanBackedClientConfig;
+import com.tealeaf.leona.mvc.client.properties.RestClientConfig;
+import com.tealeaf.leona.mvc.client.properties.Resilience4JClientRetryConfig;
 import com.tealeaf.leona.mvc.client.properties.RestTemplateConfigInjectorHelper;
-import com.tealeaf.leona.mvc.components.containers.AddOnlyArrayList;
-import com.tealeaf.leona.mvc.components.containers.AddOnlyList;
-import com.tealeaf.leona.mvc.components.containers.Context;
-import com.tealeaf.leona.mvc.components.containers.ThreadContext;
+import com.tealeaf.leona.mvc.client.retry.Retryer;
+import com.tealeaf.leona.mvc.components.containers.*;
 import com.tealeaf.leona.mvc.components.streams.LINQ;
+import io.github.resilience4j.retry.Retry;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -31,18 +32,18 @@ import java.util.function.UnaryOperator;
 
 public abstract class ClientExecuter implements ApplicationContextAware {
     static final RequestBuilder REQUEST_BUILDER = Request.Builder::build;
-
     private final String clientName;
     private final Context context = new ThreadContext();
     private final AddOnlyArrayList<PreExchangeExecutionFilter> preExecutionFilters = new AddOnlyArrayList<>();
     private final AddOnlyArrayList<PostExchangeExecutionFilter> postExecutionFilters = new AddOnlyArrayList<>();
-    final BeanBackedClientConfig clientConfig;
+    final RestClientConfig clientConfig;
     final Request preconfiguredRequestEntity;
 
+    private Retryer retryer;
     private RestTemplate restTemplate;
 
 
-    public ClientExecuter(RestTemplate restTemplate, BeanBackedClientConfig clientConfig) {
+    public ClientExecuter(RestTemplate restTemplate, RestClientConfig clientConfig) {
         this.restTemplate = restTemplate;
         this.clientConfig = clientConfig;
 
@@ -64,20 +65,29 @@ public abstract class ClientExecuter implements ApplicationContextAware {
         return this.clientName;
     }
 
+    public final RestClientConfig getConfig() {
+        return this.clientConfig;
+    }
 
-    protected void onInitializer(@NotNull ClientInitializer initializer) {}
+    protected void onInitializer(@NotNull ClientInitializationHook initializer) {}
 
     final <ResponseType> ResponseEntity<ResponseType> execute(Request request, Function<RequestEntity.BodyBuilder, RequestEntity<?>> entityFunction, ParameterizedTypeReference<ResponseType> responseTypeReference) {
-        RestClientExecution execution = new RestClientExecution(this, request, context);
+        Context residualContext = ResidualContext.from(context);
+        RestClientExecution execution = new RestClientExecution(this, request, residualContext);
 
         for (PreExchangeExecutionFilter preExchangeExecutionFilter : preExecutionFilters) {
             request = preExchangeExecutionFilter.filter(request);
         }
 
-        return restExchange(entityFunction.apply(Request.toEntityBuilder(request)), execution, responseTypeReference);
+        final Request finalRequest = request;
+
+        if (retryer != null) {
+            return retryer.execute(() -> restExchange(entityFunction.apply(Request.toEntityBuilder(finalRequest)), execution, responseTypeReference, residualContext));
+        }
+        return restExchange(entityFunction.apply(Request.toEntityBuilder(request)), execution, responseTypeReference, residualContext);
     }
 
-    private <ResponseType> ResponseEntity<ResponseType> restExchange(RequestEntity<?> request, RestClientExecution execution, ParameterizedTypeReference<ResponseType> responseTypeReference) {
+    private <ResponseType> ResponseEntity<ResponseType> restExchange(RequestEntity<?> request, RestClientExecution execution, ParameterizedTypeReference<ResponseType> responseTypeReference, Context context) {
         try {
             ResponseEntity<ResponseType> response = restTemplate.exchange(request, responseTypeReference);
             Duration executionTime = context.getOrElse(MvcLeonaConstants.REQUEST_DURATION_KEY, Duration.ZERO);
@@ -99,28 +109,30 @@ public abstract class ClientExecuter implements ApplicationContextAware {
         return response;
     }
 
-    private static Request produceRequestEntity(BeanBackedClientConfig config) {
+    private static Request produceRequestEntity(RestClientConfig config) {
         UriComponentsBuilder componentsBuilder = UriComponentsBuilder.fromUriString(config.getHost()).path(config.getPath());
         Integer port = config.getPort();
         if (port != null) componentsBuilder.port(port);
         return SimpleRequest.builder(componentsBuilder).httpMethod(config.httpMethod()).build();
     }
 
+
     @Override
     public final void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         ClientExecuter.Modifier modifier = new Modifier(this);
 
-        Consumer<ClientInitializer> initFunc = initializer -> {
+        Consumer<ClientInitializationHook> initFunc = initializer -> {
             onInitializer(initializer);
             initializer.onInitialize(modifier);
         };
 
-        LINQ.stream(DefaultInitializers.initializers()).concat(applicationContext.getBeansOfType(ClientInitializer.class).values()).forEach(initFunc);
+        LINQ.stream(DefaultInitializers.initializers()).concat(applicationContext.getBeansOfType(ClientInitializationHook.class).values()).forEach(initFunc);
 
         preExecutionFilters.sort(Comparator.<PreExchangeExecutionFilter>comparingInt(e -> e.preExecutionPriority().value()).reversed());
         postExecutionFilters.sort(Comparator.<PostExchangeExecutionFilter>comparingInt(e -> e.postExecutionPriority().value()).reversed());
     }
 
+    @Getter
     @RequiredArgsConstructor
     public static final class Modifier {
         private final ClientExecuter client;
@@ -131,6 +143,10 @@ public abstract class ClientExecuter implements ApplicationContextAware {
 
         public Logger getLogger() {
             return LoggerFactory.getLogger(client.getClass());
+        }
+
+        public void setRetryer(Retryer retryer) {
+            client.retryer = retryer;
         }
 
         public AddOnlyList<PreExchangeExecutionFilter> getPreExecutionFilters() {

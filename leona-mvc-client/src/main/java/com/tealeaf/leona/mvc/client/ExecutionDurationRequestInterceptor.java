@@ -10,7 +10,7 @@ import org.springframework.http.client.ClientHttpResponse;
 import java.io.IOException;
 import java.time.Duration;
 
-final class ExecutionDurationRequestInterceptor implements ClientHttpRequestInterceptor, ClientInitializer {
+final class ExecutionDurationRequestInterceptor implements ClientHttpRequestInterceptor, ClientInitializationHook {
     private Context clientContext;
 
     @Override

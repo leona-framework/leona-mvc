@@ -15,7 +15,7 @@ class LeonaClientConfigHolder implements ClientHttpRequestInitializer {
     @Override
     public void initialize(@NotNull ClientHttpRequest request) {}
 
-    public void addConfig(String beanName, BeanBackedClientConfig config) {
+    public void addConfig(String beanName, RestClientConfig config) {
         configurations.add(new ClientConfigInfo(beanName, config));
     }
 
@@ -24,12 +24,12 @@ class LeonaClientConfigHolder implements ClientHttpRequestInitializer {
         return configInfo == null ? null : configInfo.bean;
     }
 
-    public BeanBackedClientConfig getHighestConfig() {
+    public RestClientConfig getHighestConfig() {
         ClientConfigInfo configInfo = getHighestPropertyInfo();
         return configInfo == null ? null : configInfo.config;
     }
 
-    public LINQStream<BeanBackedClientConfig> stream() {
+    public LINQStream<RestClientConfig> stream() {
         return LINQ.stream(configurations).map(info -> info.config);
     }
 
@@ -37,5 +37,5 @@ class LeonaClientConfigHolder implements ClientHttpRequestInitializer {
         return configurations.isEmpty() ? null : configurations.get(configurations.size() - 1);
     }
 
-    record ClientConfigInfo(String bean, BeanBackedClientConfig config) {}
+    record ClientConfigInfo(String bean, RestClientConfig config) {}
 }

@@ -1,5 +1,5 @@
 package com.tealeaf.leona.mvc.client;
 
-public interface ClientInitializer {
+public interface ClientInitializationHook {
     void onInitialize(ClientExecuter.Modifier clientModifier);
 }

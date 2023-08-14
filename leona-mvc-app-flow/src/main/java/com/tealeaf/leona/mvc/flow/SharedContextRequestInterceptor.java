@@ -24,7 +24,6 @@ import java.util.function.Function;
 
 public class SharedContextRequestInterceptor implements LeonaFlowRequestInterceptor {
     private final Logger log = LoggerFactory.getLogger(LeonaFlowRequestInterceptor.class);
-    private final Context context = new ThreadContext();
     private final OnRequestEntryCapturePlan entryCapturePlan;
     private final OnRequestExitCapturePlan exitCapturePlan;
     private final Function<HttpServletRequest, String> entryMessage;
@@ -66,6 +65,7 @@ public class SharedContextRequestInterceptor implements LeonaFlowRequestIntercep
     @Override
     public boolean preHandle(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) {
         InterceptedRequestView requestView = new InterceptedRequestView(System.nanoTime(), request); // Start time
+        ThreadContext context = new ThreadContext();
 
         context.clear();
         context.put(InterceptedRequestView.class, requestView);
@@ -79,6 +79,7 @@ public class SharedContextRequestInterceptor implements LeonaFlowRequestIntercep
 
     @Override
     public void afterCompletion(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler, Exception ex) {
+        ThreadContext context = new ThreadContext();
         InterceptedRequestView requestView = context.get(InterceptedRequestView.class);
         requestView.getElapsedTime(true);
         requestView.setResponse(response);

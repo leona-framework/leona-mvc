@@ -1,6 +1,6 @@
 package com.tealeaf.leona.mvc.client;
 
-import com.tealeaf.leona.mvc.client.properties.BeanBackedClientConfig;
+import com.tealeaf.leona.mvc.client.properties.RestClientConfig;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 public abstract class TypedRestClient<TResponse> extends ClientExecuter {
     private final ParameterizedTypeReference<TResponse> responseTypeReference;
 
-    public TypedRestClient(RestTemplate restTemplate, BeanBackedClientConfig clientConfig, Class<TResponse> responseClass) {
+    public TypedRestClient(RestTemplate restTemplate, RestClientConfig clientConfig, Class<TResponse> responseClass) {
         super(restTemplate, clientConfig);
         this.responseTypeReference = ParameterizedTypeReference.forType(responseClass);
     }
@@ -19,20 +19,20 @@ public abstract class TypedRestClient<TResponse> extends ClientExecuter {
         this.responseTypeReference = ParameterizedTypeReference.forType(responseClass);
     }
 
-    protected final ResponseEntity<?> send() {
+    protected final ResponseEntity<TResponse> send() {
         return send(REQUEST_BUILDER);
     }
 
-    protected final <TRequest> ResponseEntity<?> send(TRequest requestBody) {
+    protected final <TRequest> ResponseEntity<TResponse> send(TRequest requestBody) {
         return send(REQUEST_BUILDER, requestBody);
     }
 
-    protected final ResponseEntity<?> send(RequestBuilder requestBuilder) {
+    protected final ResponseEntity<TResponse> send(RequestBuilder requestBuilder) {
         Request request = requestBuilder.build(preconfiguredRequestEntity.asBuilder());
         return execute(request, rb -> rb.accept(clientConfig.acceptType()).build(), responseTypeReference);
     }
 
-    protected final <TRequest> ResponseEntity<?> send(RequestBuilder requestBuilder, TRequest requestBody) {
+    protected final <TRequest> ResponseEntity<TResponse> send(RequestBuilder requestBuilder, TRequest requestBody) {
         Request request = requestBuilder.build(preconfiguredRequestEntity.asBuilder());
         return execute(request, rb -> rb.accept(clientConfig.acceptType())
                 .contentType(clientConfig.getContentMedia())

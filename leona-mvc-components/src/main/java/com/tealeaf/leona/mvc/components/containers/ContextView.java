@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public interface ContextView {
+    long contextId();
     Object get(Object key);
 
     boolean containsKey(Object key);

@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.client.logging;
+package com.tealeaf.leona.mvc.components;
 
 import org.slf4j.MDC.MDCCloseable;
 

@@ -15,7 +15,7 @@ import java.time.Duration;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class BeanBackedClientConfig {
+public class RestClientConfig {
     public static final String DEFAULT_HTTP_METHOD = "GET";
     public static final Integer DEFAULT_PORT = 443;
     public static final String DEFAULT_ACCEPT = MediaType.ALL_VALUE;
@@ -77,14 +77,14 @@ public class BeanBackedClientConfig {
 
 
 
-    public static BeanBackedClientConfig defaults() {
-        return BeanBackedClientConfig.builder()
-                .accept(BeanBackedClientConfig.DEFAULT_ACCEPT)
-                .contentType(BeanBackedClientConfig.DEFAULT_CONTENT_TYPE)
-                .method(BeanBackedClientConfig.DEFAULT_HTTP_METHOD)
-                .port(BeanBackedClientConfig.DEFAULT_PORT)
-                .retry(BeanBackedClientConfig.DEFAULT_RETRY_CONFIG)
-                .timeout(BeanBackedClientConfig.DEFAULT_TIMEOUT_CONFIG)
+    public static RestClientConfig defaults() {
+        return RestClientConfig.builder()
+                .accept(RestClientConfig.DEFAULT_ACCEPT)
+                .contentType(RestClientConfig.DEFAULT_CONTENT_TYPE)
+                .method(RestClientConfig.DEFAULT_HTTP_METHOD)
+                .port(RestClientConfig.DEFAULT_PORT)
+                .retry(RestClientConfig.DEFAULT_RETRY_CONFIG)
+                .timeout(RestClientConfig.DEFAULT_TIMEOUT_CONFIG)
                 .build();
     }
 

@@ -4,7 +4,7 @@ import com.tealeaf.leona.mvc.client.*;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 
-public interface ClientLogger extends PostExchangeExecutionFilter, ClientInitializer {
+public interface ClientLogger extends PostExchangeExecutionFilter, ClientInitializationHook {
     void log(ClientExecutionView executionView);
     void setLogger(Logger logger);
 

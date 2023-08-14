@@ -31,7 +31,7 @@ public class DefaultCapturePlan<T> implements CapturePlan<T>, CaptureRepository<
     }
 
     @RequiredArgsConstructor
-    static class DefaultCapturer<T> implements Capturer<T> {
+    public static class DefaultCapturer<T> implements Capturer<T> {
         private final CapturePlan<T> plan;
         private Function<T, Object> function;
 

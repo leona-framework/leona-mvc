@@ -26,7 +26,7 @@ import java.util.Map;
 @Slf4j
 @Configuration
 public class RestClientBeanProcessor implements BeanPostProcessor {
-    private static final Class<BeanBackedClientConfig> CONFIG_CLASS = BeanBackedClientConfig.class;
+    private static final Class<RestClientConfig> CONFIG_CLASS = RestClientConfig.class;
 
     private final HashSet<String> registeredBeans = new HashSet<>();
     private final ApplicationContext applicationContext;
@@ -51,12 +51,12 @@ public class RestClientBeanProcessor implements BeanPostProcessor {
         if (registeredBeans.contains(beanName)) return bean;
 
         log.debug("Attempting to extract client properties from RestTemplate bean \"{}\"", beanName);
-        BeanBackedClientConfig clientConfig = getProperties(beanName);
+        RestClientConfig clientConfig = getProperties(beanName);
         if (clientConfig == null) return bean;
 
         LeonaClientConfigHolder configHolder = RestTemplateConfigInjectorHelper.getAttachedConfigHolder(restTemplate).orElseGet(() -> {
             LeonaClientConfigHolder holder = new LeonaClientConfigHolder();
-            holder.addConfig(null, BeanBackedClientConfig.defaults());
+            holder.addConfig(null, RestClientConfig.defaults());
             restTemplate.getClientHttpRequestInitializers().add(holder);
             return holder;
         });
@@ -69,11 +69,11 @@ public class RestClientBeanProcessor implements BeanPostProcessor {
 
     @Bean
     @ConfigurationProperties("leona.clients")
-    public Map<String, BeanBackedClientConfig> getClientConfigs() {
+    public Map<String, RestClientConfig> getClientConfigs() {
         return new HashMap<>();
     }
 
-    private BeanBackedClientConfig getProperties(String prefix) {
+    private RestClientConfig getProperties(String prefix) {
         String beanIdentifier = prefix + "-" + CONFIG_CLASS.getName();
         if (applicationContext.containsBean(beanIdentifier))
             return applicationContext.getBean(beanIdentifier, CONFIG_CLASS);

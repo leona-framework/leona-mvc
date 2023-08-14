@@ -2,7 +2,7 @@ package com.tealeaf.leona.mvc.client.logging;
 
 import com.tealeaf.leona.mvc.client.ClientExecutionView;
 import com.tealeaf.leona.mvc.client.MvcLeonaConstants;
-import org.slf4j.MDC;
+import com.tealeaf.leona.mvc.components.MdcContextSupplier;
 import org.slf4j.MDC.MDCCloseable;
 import org.springframework.http.ResponseEntity;
 

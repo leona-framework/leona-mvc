@@ -18,7 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class Resilience4JClientRetryConfig extends CommonRetryConfigurationProperties.InstanceProperties {
-    private static final Set<Integer> EMPTY_STATUS_CODE_SET = Collections.unmodifiableSet(new HashSet<>());
+    public static final Set<Integer> EMPTY_STATUS_CODE_SET = Collections.unmodifiableSet(new HashSet<>());
     @SuppressWarnings("removal")
     private static final Boolean DEFAULT_ENABLED_VALUE = new Boolean(false);
 

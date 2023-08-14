@@ -1,23 +1,23 @@
 package com.tealeaf.leona.mvc.flow;
 
+import com.tealeaf.leona.mvc.components.containers.ThreadAware;
 import com.tealeaf.leona.mvc.components.streams.LINQ;
 import com.tealeaf.leona.mvc.components.streams.LINQStream;
-import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.jboss.logging.MDC;
 
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
 @RequiredArgsConstructor
-public class InterceptedRequestView {
+public class InterceptedRequestView extends HashMap<String, String> implements ThreadAware {
     private final long startTime;
-    private final Map<String, String> persistentMDC = new HashMap<>();
 
     @Getter
     private final HttpServletRequest request;
@@ -25,14 +25,6 @@ public class InterceptedRequestView {
     @Getter @Setter(AccessLevel.PACKAGE)
     private HttpServletResponse response;
     private Duration executionTime;
-
-    void put(String key, String value) {
-        persistentMDC.put(key, value);
-    }
-
-    public LINQStream<Map.Entry<String, String>> getPersistentMdcEntries() {
-        return LINQ.stream(persistentMDC.entrySet());
-    }
 
     public Duration getElapsedTime() {
         if (executionTime != null) return executionTime;
@@ -42,5 +34,12 @@ public class InterceptedRequestView {
     Duration getElapsedTime(boolean finalize) {
         if (!finalize) return getElapsedTime();
         return executionTime = Duration.ofNanos(System.nanoTime() - startTime);
+    }
+
+    @Override
+    public void onThreadCopy() {
+        for (Map.Entry<String, String> persistentEntries : entrySet()) {
+            MDC.put(persistentEntries.getKey(), persistentEntries.getValue());
+        }
     }
 }

@@ -1,24 +1,18 @@
 package com.tealeaf.leona.mvc.flow;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.tealeaf.leona.mvc.components.captures.CapturePlan;
 import com.tealeaf.leona.mvc.components.captures.PersistentCapturer;
 import com.tealeaf.leona.mvc.flow.serializers.HttpServletRequestCapturerDeserializer;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
+import lombok.Setter;
 
-import java.util.function.Function;
-
+@Getter
+@Setter
 @JsonDeserialize(using = HttpServletRequestCapturerDeserializer.class)
 public class HttpServletRequestCapturer extends PersistentCapturer<HttpServletRequest> {
-    @Getter private String headerName;
-    @Getter private String contextKey;
-
-    @JsonIgnore
-    private Function<HttpServletRequest, Object> function;
-    @JsonIgnore
-    private CapturePlan<HttpServletRequest> capturePlan;
+    private String headerName;
+    private String contextKey;
 
     public HttpServletRequestCapturer(String headerName, String contextKey, boolean isPersistent) {
         super(null, isPersistent);
@@ -35,22 +29,12 @@ public class HttpServletRequestCapturer extends PersistentCapturer<HttpServletRe
     }
 
     @Override
-    public CapturePlan<HttpServletRequest> capture(Function<HttpServletRequest, Object> capture) {
-        this.function = servletRequest -> servletRequest.getHeader(headerName);
-        return capturePlan;
+    public Object apply(HttpServletRequest servletRequest) {
+        return servletRequest.getHeader(headerName);
     }
 
     @Override
     public boolean isCaptureable(HttpServletRequest item) {
-        return function != null && item.getHeader(headerName) != null;
-    }
-
-    public void setPlan(CapturePlan<HttpServletRequest> plan) {
-        this.capturePlan = plan;
-    }
-
-    @Override
-    public Object apply(HttpServletRequest servletRequest) {
-        return function.apply(servletRequest);
+        return item.getHeader(headerName) != null && super.isCaptureable(item);
     }
 }

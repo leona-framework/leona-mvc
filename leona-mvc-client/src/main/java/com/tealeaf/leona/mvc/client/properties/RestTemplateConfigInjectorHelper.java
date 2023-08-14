@@ -15,7 +15,7 @@ public class RestTemplateConfigInjectorHelper {
         return LINQ.ofType(restTemplate.getClientHttpRequestInitializers().stream(), LeonaClientConfigHolder.class).findFirst();
     }
 
-    public static Optional<BeanBackedClientConfig> getAttachedConfig(RestTemplate restTemplate) {
+    public static Optional<RestClientConfig> getAttachedConfig(RestTemplate restTemplate) {
         return getAttachedConfigHolder(restTemplate).map(LeonaClientConfigHolder::getHighestConfig);
     }
 
@@ -23,13 +23,13 @@ public class RestTemplateConfigInjectorHelper {
         return getAttachedConfigHolder(restTemplate).map(LeonaClientConfigHolder::getHighestBeanName).orElseThrow();
     }
 
-    public static BeanBackedClientConfig extractProperties(RestTemplate restTemplate) {
+    public static RestClientConfig extractProperties(RestTemplate restTemplate) {
         LeonaClientConfigHolder configHolder = getAttachedConfigHolder(restTemplate).orElseThrow(); // TODO custom exception
-        List<BeanBackedClientConfig> boundConfigs = configHolder.stream().toList();
+        List<RestClientConfig> boundConfigs = configHolder.stream().toList();
 
-        final BeanBackedClientConfig mergedConfig = ClientConfigMerger.mergeConfigs(boundConfigs, new BeanBackedClientConfig());
+        final RestClientConfig mergedConfig = ClientConfigMerger.mergeConfigs(boundConfigs, new RestClientConfig());
 
-        Set<ConstraintViolation<BeanBackedClientConfig>> violations = getValidator().validate(mergedConfig);
+        Set<ConstraintViolation<RestClientConfig>> violations = getValidator().validate(mergedConfig);
         if (!violations.isEmpty()) throw new ConstraintViolationException(violations);
 
         Resilience4JClientRetryConfig retryConfig = mergedConfig.getRetry();

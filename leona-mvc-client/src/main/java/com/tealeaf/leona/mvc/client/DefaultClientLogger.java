@@ -1,5 +1,6 @@
 package com.tealeaf.leona.mvc.client;
 
+import com.tealeaf.leona.mvc.client.logging.LoggerConfiguration;
 import com.tealeaf.leona.mvc.client.logging.MdcAwareClientLogger;
 import com.tealeaf.leona.mvc.components.utils.ClassConstructor;
 import org.slf4j.Logger;
@@ -14,7 +15,7 @@ class DefaultClientLogger implements MdcAwareClientLogger {
     private final Level level;
     private Logger logger;
 
-    public DefaultClientLogger(ClientAutoConfigurationSource.LoggerConfiguration loggerConfiguration) {
+    public DefaultClientLogger(LoggerConfiguration loggerConfiguration) {
         Class<? extends Predicate<ClientExecutionView>> logPredicate = loggerConfiguration.getLogPredicate();
         Class<? extends Function<ClientExecutionView, String>> messageSupplier = loggerConfiguration.getMessageSupplier();
 
