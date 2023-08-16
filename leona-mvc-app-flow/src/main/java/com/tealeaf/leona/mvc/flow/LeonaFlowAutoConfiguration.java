@@ -1,22 +1,23 @@
 package com.tealeaf.leona.mvc.flow;
 
-import brave.Tracer;
+import io.micrometer.tracing.brave.bridge.BraveTracer;
+import org.springframework.boot.actuate.autoconfigure.tracing.ConditionalOnEnabledTracing;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.cloud.sleuth.autoconfig.brave.BraveAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
-@EnableAspectJAutoProxy
-@Import({BraveAutoConfiguration.class})
-public class LeonaFlowAutoConfiguration implements WebMvcConfigurer {
+@ConditionalOnEnabledTracing
+@ConditionalOnClass(BraveTracer.class)
+@EnableConfigurationProperties(LeonaFlowAutoConfigurationSource.class)
+class LeonaFlowAutoConfiguration implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
 
     public LeonaFlowAutoConfiguration(ApplicationContext applicationContext) {
@@ -25,14 +26,22 @@ public class LeonaFlowAutoConfiguration implements WebMvcConfigurer {
 
     @Bean
     @ConditionalOnMissingBean(OnRequestEntryCapturePlan.class)
-    public OnRequestEntryCapturePlan defaultRequestEntryCapturePlan(Tracer tracer) {
+    public OnRequestEntryCapturePlan defaultRequestEntryCapturePlan(BraveTracer tracer) {
         return new DefaultOnRequestEntryCapturePlan(tracer);
     }
 
     @Bean
+    @ConditionalOnProperty(value = "leona.flow.request-interceptor.use-default-capturers", matchIfMissing = true)
     @ConditionalOnMissingBean(OnRequestExitCapturePlan.class)
     public OnRequestExitCapturePlan defaultRequestExitCapturePlan() {
         return new DefaultOnRequestExitCapturePlan();
+    }
+
+    @Bean
+    @ConditionalOnProperty(value = "leona.flow.request-interceptor.use-default-capturers", havingValue = "false")
+    @ConditionalOnMissingBean(OnRequestExitCapturePlan.class)
+    public OnRequestExitCapturePlan noOpExitCapturePlan() {
+        return new NoOpExitCapturePlan();
     }
 
     @Bean
@@ -42,14 +51,9 @@ public class LeonaFlowAutoConfiguration implements WebMvcConfigurer {
             LeonaFlowAutoConfigurationSource autoConfigurationSource,
             OnRequestEntryCapturePlan entryCapturePlan,
             OnRequestExitCapturePlan exitCapturePlan,
-            Tracer tracer
+            BraveTracer tracer
     ) {
         return new SharedContextRequestInterceptor(autoConfigurationSource.getRequestInterceptor(), entryCapturePlan, exitCapturePlan, tracer);
-    }
-
-    @Bean
-    public LeonaFlowAutoConfigurationSource getLoggingSource() {
-        return new LeonaFlowAutoConfigurationSource();
     }
 
     @Override

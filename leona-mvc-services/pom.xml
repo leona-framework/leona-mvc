@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>leona-mvc-services</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${leona-mvc.version}</version>
 	<name>leona-mvc-services</name>
 	<description>leona-mvc-services</description>
 
@@ -23,7 +23,7 @@
 	<parent>
 		<groupId>com.tealeaf.leona</groupId>
 		<artifactId>leona-mvc</artifactId>
-		<version>0.0.0</version>
+		<version>0.0.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -35,7 +35,14 @@
 		<dependency>
 			<groupId>com.tealeaf.leona</groupId>
 			<artifactId>leona-mvc-components</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- Optional App Flow Dependency -->
+		<dependency>
+			<groupId>com.tealeaf.leona</groupId>
+			<artifactId>leona-mvc-app-flow</artifactId>
+			<scope>provided</scope>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>

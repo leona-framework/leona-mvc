@@ -103,6 +103,13 @@ public final class LINQ {
         return new LINQStream<>(stream).filter(i -> targetClass.isAssignableFrom(i.getClass())).map(i -> (R)i);
     }
 
+    public static <T> LINQStream<T> reverse(Stream<T> stream) {
+        return stream.collect(Collectors.collectingAndThen(Collectors.toList(), list -> {
+            Collections.reverse(list);
+            return new ListCollectedStream<>(list.stream(), list);
+        }));
+    }
+
     public static <T> List<T> toList(Stream<T> stream, Predicate<T> predicate) {
         return stream.filter(predicate).toList();
     }

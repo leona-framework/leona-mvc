@@ -4,7 +4,7 @@ import com.tealeaf.leona.mvc.components.EventType;
 import com.tealeaf.leona.mvc.components.MdcLoggingConstants;
 import com.tealeaf.leona.mvc.components.captures.DefaultCapturePlan;
 
-public class DefaultOnRequestExitCapturePlan extends DefaultCapturePlan<InterceptedRequestView> implements OnRequestExitCapturePlan {
+class DefaultOnRequestExitCapturePlan extends DefaultCapturePlan<InterceptedRequestView> implements OnRequestExitCapturePlan {
     public DefaultOnRequestExitCapturePlan() {
         execution(MdcLoggingConstants.EVENT_TYPE).capture(i -> EventType.EXIT);
         execution(MdcLoggingConstants.STATUS_CODE).capture(irv -> irv.getResponse().getStatus());

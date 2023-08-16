@@ -13,5 +13,6 @@ public interface ExecutionHandle<T> {
     default T get() {
         return get(Either::result);
     }
+
     Mono<T> toMono();
 }

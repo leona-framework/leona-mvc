@@ -7,5 +7,6 @@ public class MdcLoggingConstants {
     public static final String STATUS_CODE = "status";
     public static final String EXECUTION_TARGET = "executionTarget";
     public static final String TRACE_ID = "traceId";
+    public static final String SPAN_ID = "spanId";
     public static final String ENDPOINT = "endpoint";
 }

@@ -61,6 +61,7 @@ class SimpleExecutionHandle<T> implements SynchronousExecutionHandle<T> {
         long startTime = System.nanoTime();
         Supplier<T> supplier = executable;
 
+        context.put(ExecutionType.class, ExecutionType.SYNCHRONOUS);
         for (ServiceExecutionFilter filter : executionFilters) {
             supplier = filter.beforeExecution(serviceMetadata, supplier, context);
         }
@@ -68,7 +69,7 @@ class SimpleExecutionHandle<T> implements SynchronousExecutionHandle<T> {
         try {
             return doPostExecutionFilters(new MutableServiceExecutionResult<>(supplier.get(), Duration.ofNanos(System.nanoTime() - startTime), serviceMetadata, context));
         } catch (Exception exception) {
-            doPostExecutionFilters(new MutableServiceExecutionResult<>(supplier.get(), Duration.ofNanos(System.nanoTime() - startTime), serviceMetadata, context));
+            doPostExecutionFilters(new MutableServiceExecutionResult<>(exception, Duration.ofNanos(System.nanoTime() - startTime), serviceMetadata, context));
             throw exception;
         }
     }

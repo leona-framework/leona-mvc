@@ -1,27 +1,28 @@
 package com.tealeaf.leona.mvc.flow;
 
-import brave.Span;
-import brave.Tracer;
 import com.tealeaf.leona.mvc.components.EventType;
 import com.tealeaf.leona.mvc.components.MdcLoggingConstants;
 import com.tealeaf.leona.mvc.components.captures.CaptureElement;
 import com.tealeaf.leona.mvc.components.captures.DefaultCapturePlan;
 import com.tealeaf.leona.mvc.components.captures.PersistentCapturer;
+import io.micrometer.tracing.Span;
+import io.micrometer.tracing.brave.bridge.BraveTracer;
 import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.MDC;
 
 import java.util.List;
 
 class DefaultOnRequestEntryCapturePlan extends DefaultCapturePlan<HttpServletRequest> implements OnRequestEntryCapturePlan {
-    private final Tracer tracer;
+    private final BraveTracer tracer;
 
-    public DefaultOnRequestEntryCapturePlan(Tracer tracer) {
+    public DefaultOnRequestEntryCapturePlan(BraveTracer tracer) {
         this.tracer = tracer;
         execution(MdcLoggingConstants.EVENT_TYPE).capture(i -> EventType.ENTRY);
         persistent(MdcLoggingConstants.TRACE_ID).capture(this::extractTraceId);
         persistent(MdcLoggingConstants.ENDPOINT).capture(HttpServletRequest::getServletPath);
     }
 
-    DefaultOnRequestEntryCapturePlan(List<CaptureElement<HttpServletRequest>> captureElements, Tracer tracer) {
+    DefaultOnRequestEntryCapturePlan(List<CaptureElement<HttpServletRequest>> captureElements, BraveTracer tracer) {
         this.tracer = tracer;
         getCaptures().clear();
         getCaptures().addAll(captureElements);
@@ -35,17 +36,7 @@ class DefaultOnRequestEntryCapturePlan extends DefaultCapturePlan<HttpServletReq
     }
 
     private String extractTraceId(HttpServletRequest servletRequest) {
-        String trace = servletRequest.getHeader("x-b3-traceid");
-        if (trace != null) return trace;
-
-        trace = servletRequest.getHeader("trace-id");
-        if (trace != null) return trace;
-
-        trace = servletRequest.getHeader("traceId");
-        if (trace != null) return trace;
-
         Span span = tracer.currentSpan();
-        if (span == null) span = tracer.nextSpan();
-        return span.context().traceIdString();
+        return span == null ? null : span.context().traceId();
     }
 }

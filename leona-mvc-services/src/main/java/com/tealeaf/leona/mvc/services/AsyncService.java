@@ -9,10 +9,10 @@ import reactor.core.scheduler.Schedulers;
 import java.util.List;
 import java.util.function.Supplier;
 
-public interface AsyncService extends LeonaService {
+public interface AsyncService extends MetadataHolder {
     default <T> AsyncExecutionHandle<T> handleAsync(Supplier<T> supplier) {
-        ServiceMetadata metadata = LeonaService.getMetadataFor(this);
-        List<ServiceExecutionFilter> executionFilters = LeonaService.getExecutionFilters(this);
+        ServiceMetadata metadata = MetadataHolder.getMetadataFor(this);
+        List<ServiceExecutionFilter> executionFilters = MetadataHolder.getExecutionFilters(this);
         return new MonoBackedExecutionHandle<>(supplier, executionFilters, metadata, new ThreadContext());
     }
 
@@ -21,8 +21,8 @@ public interface AsyncService extends LeonaService {
     }
 
     default <T1, T2> AsyncExecutionHandle<Tuple<T1, T2>> handleAsync(Supplier<T1> supplier1, Supplier<T2> supplier2) {
-        ServiceMetadata metadata = LeonaService.getMetadataFor(this);
-        List<ServiceExecutionFilter> executionFilters = LeonaService.getExecutionFilters(this);
+        ServiceMetadata metadata = MetadataHolder.getMetadataFor(this);
+        List<ServiceExecutionFilter> executionFilters = MetadataHolder.getExecutionFilters(this);
 
         ThreadContext threadContext = new ThreadContext();
         Context simpleContext = new SimpleContext(new ThreadAwareMap<>(threadContext));
@@ -34,6 +34,7 @@ public interface AsyncService extends LeonaService {
     }
 
     private <T> Supplier<T> doPreExecutionFilters(Supplier<T> supplier, ServiceMetadata serviceMetadata, List<ServiceExecutionFilter> executionFilters, Context context) {
+        context.put(ExecutionType.class, ExecutionType.ASYNCHRONOUS);
         for (ServiceExecutionFilter executionFilter : executionFilters) {
             supplier = executionFilter.beforeExecution(serviceMetadata, supplier, context);
         }

@@ -11,18 +11,6 @@ import java.util.Set;
 public class RestTemplateConfigInjectorHelper {
     private static Validator validator;
 
-    public static Optional<LeonaClientConfigHolder> getAttachedConfigHolder(RestTemplate restTemplate) {
-        return LINQ.ofType(restTemplate.getClientHttpRequestInitializers().stream(), LeonaClientConfigHolder.class).findFirst();
-    }
-
-    public static Optional<RestClientConfig> getAttachedConfig(RestTemplate restTemplate) {
-        return getAttachedConfigHolder(restTemplate).map(LeonaClientConfigHolder::getHighestConfig);
-    }
-
-    public static String getBeanName(RestTemplate restTemplate) {
-        return getAttachedConfigHolder(restTemplate).map(LeonaClientConfigHolder::getHighestBeanName).orElseThrow();
-    }
-
     public static RestClientConfig extractProperties(RestTemplate restTemplate) {
         LeonaClientConfigHolder configHolder = getAttachedConfigHolder(restTemplate).orElseThrow(); // TODO custom exception
         List<RestClientConfig> boundConfigs = configHolder.stream().toList();
@@ -37,6 +25,18 @@ public class RestTemplateConfigInjectorHelper {
         else retryConfig.setConfigName(getBeanName(restTemplate));
 
         return mergedConfig;
+    }
+
+    static Optional<LeonaClientConfigHolder> getAttachedConfigHolder(RestTemplate restTemplate) {
+        return LINQ.ofType(restTemplate.getClientHttpRequestInitializers().stream(), LeonaClientConfigHolder.class).findFirst();
+    }
+
+    static Optional<RestClientConfig> getAttachedConfig(RestTemplate restTemplate) {
+        return getAttachedConfigHolder(restTemplate).map(LeonaClientConfigHolder::getHighestConfig);
+    }
+
+    static String getBeanName(RestTemplate restTemplate) {
+        return getAttachedConfigHolder(restTemplate).map(LeonaClientConfigHolder::getHighestBeanName).orElseThrow();
     }
 
     private static Validator getValidator() {

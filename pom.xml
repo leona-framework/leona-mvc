@@ -8,23 +8,28 @@
 		<version>3.1.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>com.tealeaf.leona</groupId>
 	<artifactId>leona-mvc</artifactId>
-	<version>0.0.0</version>
+	<version>0.0.1</version>
 	<name>leona-mvc</name>
 	<description>leona-mvc</description>
 	<packaging>pom</packaging>
-
-	<properties>
-		<java.version>17</java.version>
-	</properties>
 
 	<modules>
 		<module>leona-mvc-client</module>
 		<module>leona-mvc-components</module>
 		<module>leona-mvc-services</module>
         <module>leona-mvc-app-flow</module>
+        <module>leona-mvc-testing</module>
+		<module>leona-mvc-observability</module>
     </modules>
+
+	<properties>
+		<java.version>17</java.version>
+		<spring.version>3.1.2</spring.version>
+		<leona-mvc.version>0.0.1</leona-mvc.version>
+	</properties>
 
 
 	<dependencies>
@@ -68,7 +73,45 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.tealeaf.leona</groupId>
+			<artifactId>leona-testing</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.tealeaf.leona</groupId>
+				<artifactId>leona-mvc-services</artifactId>
+				<version>${leona-mvc.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.tealeaf.leona</groupId>
+				<artifactId>leona-mvc-components</artifactId>
+				<version>${leona-mvc.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.tealeaf.leona</groupId>
+				<artifactId>leona-mvc-app-flow</artifactId>
+				<version>${leona-mvc.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.tealeaf.leona</groupId>
+				<artifactId>leona-mvc-testing</artifactId>
+				<version>${leona-mvc.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.tealeaf.leona</groupId>
+				<artifactId>leona-mvc-client</artifactId>
+				<version>${leona-mvc.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>

@@ -15,6 +15,14 @@ public record Tuple<T1, T2>(@NotNull T1 item1, @NotNull T2 item2) implements Str
         Objects.requireNonNull(item2, "item2");
     }
 
+    public <T3> Triple<T1, T2, T3> append(T3 item3) {
+        return new Triple<>(item1, item2, item3);
+    }
+
+    public <T3> Tuple<Tuple<T1, T2>, T3> concat(T3 item3) {
+        return new Tuple<>(this, item3);
+    }
+
     public <R> Tuple<R, T2> mapT1(Function<T1, R> mapper) {
         return new Tuple<>(mapper.apply(item1), item2);
     }

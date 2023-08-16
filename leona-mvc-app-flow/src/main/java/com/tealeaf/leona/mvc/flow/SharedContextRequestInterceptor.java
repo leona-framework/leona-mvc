@@ -1,13 +1,12 @@
 package com.tealeaf.leona.mvc.flow;
 
-import brave.Tracer;
 import com.tealeaf.leona.mvc.components.captures.CaptureElement;
 import com.tealeaf.leona.mvc.components.captures.CapturePlan;
 import com.tealeaf.leona.mvc.components.captures.PersistentCapturer;
-import com.tealeaf.leona.mvc.components.containers.Context;
 import com.tealeaf.leona.mvc.components.containers.ThreadContext;
 import com.tealeaf.leona.mvc.components.utils.ClassConstructor;
 import com.tealeaf.leona.mvc.flow.LeonaFlowAutoConfigurationSource.RequestInterceptorConfig;
+import io.micrometer.tracing.brave.bridge.BraveTracer;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.NotNull;
@@ -29,8 +28,10 @@ public class SharedContextRequestInterceptor implements LeonaFlowRequestIntercep
     private final Function<HttpServletRequest, String> entryMessage;
     private final Function<InterceptedRequestView, String> exitMessage;
     private final Level level;
+    private final BraveTracer tracer;
 
-    public SharedContextRequestInterceptor(RequestInterceptorConfig requestInterceptorConfig, OnRequestEntryCapturePlan entryCapturePlan, OnRequestExitCapturePlan exitCapturePlan, Tracer tracer) {
+    public SharedContextRequestInterceptor(RequestInterceptorConfig requestInterceptorConfig, OnRequestEntryCapturePlan entryCapturePlan, OnRequestExitCapturePlan exitCapturePlan, BraveTracer tracer) {
+        this.tracer = tracer;
         List<HttpServletRequestCapturer> configCapturers = requestInterceptorConfig.getRequestCapturers();
 
         List<CaptureElement<HttpServletRequest>> captureElements = new ArrayList<>(entryCapturePlan.getCaptures());

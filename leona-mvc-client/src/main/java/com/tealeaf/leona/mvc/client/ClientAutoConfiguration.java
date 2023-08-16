@@ -5,24 +5,36 @@ import com.tealeaf.leona.mvc.client.logging.ClientCapturePlan;
 import com.tealeaf.leona.mvc.client.logging.ClientLogger;
 import com.tealeaf.leona.mvc.client.logging.LoggerConfiguration;
 import com.tealeaf.leona.mvc.client.logging.MdcClientCaptureFilter;
+import com.tealeaf.leona.mvc.client.properties.RestClientBeanProcessor;
 import com.tealeaf.leona.mvc.client.retry.ClientRetryAutoConfiguration;
+import com.tealeaf.leona.mvc.flow.InterceptedRequestView;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @AutoConfigureAfter(ClientRetryAutoConfiguration.class)
-@Import(ClientRetryAutoConfiguration.class)
+@Import({RestClientBeanProcessor.class, ClientRetryAutoConfiguration.class})
 class ClientAutoConfiguration {
     private final ApplicationContext applicationContext;
 
     public ClientAutoConfiguration(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
+    }
+
+    @Bean
+    @ConditionalOnBean(RestTemplateBuilder.class)
+    @ConditionalOnMissingBean(RestTemplate.class)
+    public RestTemplate leonaConfiguredRestTemplate(RestTemplateBuilder restTemplateBuilder) {
+        return restTemplateBuilder.build();
     }
 
     @Bean
@@ -54,7 +66,7 @@ class ClientAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(ContextToHeaderForwarder.class)
     @ConditionalOnProperty(value = "leona.client.forwarding.enabled", matchIfMissing = true)
-    @ConditionalOnClass(name = "com.tealeaf.leona.mvc.flow.InterceptedRequestView")
+    @ConditionalOnClass(InterceptedRequestView.class)
     public ContextToHeaderForwarder defaultContextForwarder(ClientAutoConfigurationSource configurationSource) {
         return new DefaultContextToHeaderForwarder(configurationSource.getForwarding().getForwardedProperties());
     }

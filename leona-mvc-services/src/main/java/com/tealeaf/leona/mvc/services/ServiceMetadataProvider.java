@@ -7,17 +7,17 @@ import org.slf4j.LoggerFactory;
 
 @Getter(AccessLevel.PACKAGE)
 public class ServiceMetadataProvider {
-    private final LeonaService service;
+    private final MetadataHolder service;
     private final Logger logger;
     private ServiceExecutionFilterRepository executionFilterRepository;
 
-    ServiceMetadataProvider(LeonaService service, ServiceExecutionFilterRepository executionFilterRepository) {
+    ServiceMetadataProvider(MetadataHolder service, ServiceExecutionFilterRepository executionFilterRepository) {
         this.service = service;
         this.logger = LoggerFactory.getLogger(service.getClass());
         this.executionFilterRepository = executionFilterRepository;
     }
 
-    ServiceMetadataProvider(LeonaService service) {
+    ServiceMetadataProvider(MetadataHolder service) {
         this(service, null);
     }
 

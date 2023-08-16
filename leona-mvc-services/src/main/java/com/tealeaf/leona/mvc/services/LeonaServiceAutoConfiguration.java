@@ -1,5 +1,6 @@
 package com.tealeaf.leona.mvc.services;
 
+import com.tealeaf.leona.mvc.flow.InterceptedRequestView;
 import com.tealeaf.leona.mvc.services.flow.FlowSupplierDecorator;
 import com.tealeaf.leona.mvc.services.logging.LoggerConfiguration;
 import com.tealeaf.leona.mvc.services.logging.MdcServiceCaptureFilter;
@@ -14,15 +15,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
 @Configuration
-class ServiceAutoConfiguration {
+class LeonaServiceAutoConfiguration {
     private final ApplicationContext applicationContext;
 
-    ServiceAutoConfiguration(ApplicationContext applicationContext) {
+    LeonaServiceAutoConfiguration(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
 
     @Bean
-    @ConditionalOnClass(name = "com.tealeaf.leona.mvc.flow.LeonaFlowAutoConfiguration")
+    @ConditionalOnClass(InterceptedRequestView.class)
     @ConditionalOnMissingBean(FlowSupplierDecorator.class)
     public FlowSupplierDecorator getFlowDecorator() {
         return new FlowSupplierDecorator();

@@ -127,6 +127,7 @@ class MonoBackedExecutionHandle<T> implements AsyncExecutionHandle<T> {
     }
 
     private Supplier<T> doPreExecutionFilters(Supplier<T> supplier) {
+        context.put(ExecutionType.class, ExecutionType.ASYNCHRONOUS);
         for (ServiceExecutionFilter executionFilter : executionFilters) {
             supplier = executionFilter.beforeExecution(serviceMetadata, supplier, context);
         }

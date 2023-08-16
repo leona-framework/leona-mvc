@@ -6,10 +6,10 @@ import com.tealeaf.leona.mvc.components.VoidLike;
 import java.util.List;
 import java.util.function.Supplier;
 
-public interface SynchronousService extends LeonaService {
+public interface SynchronousService extends MetadataHolder {
     default <T> SynchronousExecutionHandle<T> handle(Supplier<T> supplier) {
-        ServiceMetadata metadata = LeonaService.getMetadataFor(this);
-        List<ServiceExecutionFilter> executionFilters = LeonaService.getExecutionFilters(this);
+        ServiceMetadata metadata = MetadataHolder.getMetadataFor(this);
+        List<ServiceExecutionFilter> executionFilters = MetadataHolder.getExecutionFilters(this);
         return new SimpleExecutionHandle<>(supplier, executionFilters, metadata);
     }
 

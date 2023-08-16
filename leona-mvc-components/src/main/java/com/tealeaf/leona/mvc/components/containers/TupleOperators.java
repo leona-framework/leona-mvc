@@ -16,11 +16,11 @@ public class TupleOperators {
 
 
     public static class TupleIterator implements Iterable<Object>, Iterator<Object> {
+        private final boolean rightSided;
         private Object standby;
-        private boolean rightSided;
 
         public TupleIterator(Tuple<?, ?> packedTuple, boolean rightSided) {
-            standby = rightSided ? packedTuple.item2() : packedTuple.item1();
+            standby = packedTuple;
             this.rightSided = rightSided;
         }
 

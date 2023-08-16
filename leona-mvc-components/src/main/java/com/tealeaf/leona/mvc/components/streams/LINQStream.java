@@ -297,6 +297,10 @@ public class LINQStream<T> implements Stream<T> {
         return LINQ.ofType(stream, targetClass);
     }
 
+    public LINQStream<T> reverse() {
+        return LINQ.reverse(stream);
+    }
+
     public List<T> toList(Predicate<T> predicate) {
         return LINQ.toList(stream, predicate);
     }
