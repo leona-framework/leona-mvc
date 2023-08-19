@@ -15,10 +15,10 @@ Welcome to the **Leona Framework** repository. Here, you'll find a set of librar
    - Additionally, the module includes a built-in retry mechanism using resilience4j.
 
 3. **leona-mvc-components**:
-   - This module contains various components used by other leona-mvc libraries.
+   - This module contains various components used by other Leona-mvc libraries.
 
 4. **leona-mvc-observability**:
-   - Offers observability enhancements, including metrics and metric tracking for leona-mvc modules.
+   - Offers observability enhancements, including metrics and metric tracking for Leona-mvc modules.
    - The mvc-services module gains the ability to track function execution through the default handling methods.
 
 5. **leona-mvc-services**:
@@ -26,7 +26,7 @@ Welcome to the **Leona Framework** repository. Here, you'll find a set of librar
    - Inherited classes benefit from a range of helpful default methods that decorate functions, enabling automatic logging, timing, and manipulation.
 
 6. **leona-mvc-testing**:
-   - This module offers testing utilities for the leona-mvc libraries, helping you ensure the stability and correctness of your code.
+   - This module offers testing utilities for the Leona-mvc libraries, helping you ensure the stability and correctness of your code.
 
 ### Getting Started
 
