@@ -20,7 +20,7 @@
     <!-- FIREFLY PARENT  -->
     <!-- - - - - - - - - -->
     <parent>
-        <groupId>org.lyora.leona</groupId>
+        <groupId>com.sylvona.leona</groupId>
         <artifactId>leona-mvc-parent</artifactId>
         <version>0.0.1</version>
         <relativePath>../leona-mvc-parent/pom.xml</relativePath> <!-- lookup parent from repository -->
@@ -31,11 +31,6 @@
     <!--  DEPENDENCIES   -->
     <!-- - - - - - - - - -->
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-core</artifactId>
@@ -48,12 +43,20 @@
         </dependency>
 
         <dependency>
-            <groupId>org.lyora.leona</groupId>
+            <groupId>com.sylvona.leona</groupId>
             <artifactId>leona-mvc-services</artifactId>
             <scope>provided</scope>
             <optional>true</optional>
         </dependency>
-
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -1,4 +1,4 @@
-package org.lyora.leona.mvc.components;
+package com.sylvona.leona.mvc.components;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

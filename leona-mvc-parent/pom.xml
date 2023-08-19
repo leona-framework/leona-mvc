@@ -27,7 +27,7 @@
 	</properties>
 
 	<parent>
-		<groupId>org.lyora.leona</groupId>
+		<groupId>com.sylvona.leona</groupId>
 		<artifactId>leona-core-parent</artifactId>
 		<version>0.0.2</version>
 		<relativePath>../../leona-core/leona-core-parent/pom.xml</relativePath> <!-- lookup parent from repository -->
@@ -36,15 +36,10 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.lyora.leona</groupId>
+			<groupId>com.sylvona.leona</groupId>
 			<artifactId>leona-core</artifactId>
-			<version>${leona-core.version}</version>
+			<version>0.0.2</version>
 			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 
 		<!--Web MVC Dependency-->
@@ -53,21 +48,9 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!--Various object validations (Jakarta)-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
-		</dependency>
-
-		<!--Guava-->
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -75,48 +58,34 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.lyora.leona</groupId>
+				<groupId>com.sylvona.leona</groupId>
 				<artifactId>leona-mvc-services</artifactId>
 				<version>0.0.1</version>
 			</dependency>
 			<dependency>
-				<groupId>org.lyora.leona</groupId>
+				<groupId>com.sylvona.leona</groupId>
 				<artifactId>leona-mvc-components</artifactId>
 				<version>0.0.1</version>
 			</dependency>
 			<dependency>
-				<groupId>org.lyora.leona</groupId>
+				<groupId>com.sylvona.leona</groupId>
 				<artifactId>leona-mvc-app-flow</artifactId>
 				<version>0.0.1</version>
 			</dependency>
 			<dependency>
-				<groupId>org.lyora.leona</groupId>
+				<groupId>com.sylvona.leona</groupId>
 				<artifactId>leona-mvc-testing</artifactId>
 				<version>0.0.1</version>
 			</dependency>
 			<dependency>
-				<groupId>org.lyora.leona</groupId>
+				<groupId>com.sylvona.leona</groupId>
 				<artifactId>leona-mvc-client</artifactId>
 				<version>0.0.1</version>
 			</dependency>
 			<dependency>
-				<groupId>org.lyora.leona</groupId>
+				<groupId>com.sylvona.leona</groupId>
 				<artifactId>leona-common</artifactId>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>

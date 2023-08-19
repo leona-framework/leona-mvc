@@ -21,7 +21,7 @@
 	<!-- FIREFLY PARENT  -->
 	<!-- - - - - - - - - -->
 	<parent>
-		<groupId>org.lyora.leona</groupId>
+		<groupId>com.sylvona.leona</groupId>
 		<artifactId>leona-mvc-parent</artifactId>
 		<version>0.0.1</version>
 		<relativePath>../leona-mvc-parent/pom.xml</relativePath> <!-- lookup parent from repository -->
@@ -33,37 +33,21 @@
 	<!-- - - - - - - - - -->
 	<dependencies>
 		<dependency>
-			<groupId>org.lyora.leona</groupId>
+			<groupId>com.sylvona.leona</groupId>
 			<artifactId>leona-mvc-components</artifactId>
 		</dependency>
 
 		<!-- Optional App Flow Dependency -->
 		<dependency>
-			<groupId>org.lyora.leona</groupId>
+			<groupId>com.sylvona.leona</groupId>
 			<artifactId>leona-mvc-app-flow</artifactId>
 			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-core</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -71,12 +55,7 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
-				<configuration>
-					<source>17</source>
-					<target>17</target>
-				</configuration>
+				<artifactId>maven-source-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
