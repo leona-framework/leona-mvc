@@ -19,6 +19,8 @@ import java.util.Map;
 @Component
 @ConfigurationProperties("leona.client")
 public class ClientAutoConfigurationSource {
+    public static final String CONFIGURATION_QUALIFIER = "leona.client.configurations";
+
     private Map<String, RestClientConfig> configurations;
 
     @NestedConfigurationProperty

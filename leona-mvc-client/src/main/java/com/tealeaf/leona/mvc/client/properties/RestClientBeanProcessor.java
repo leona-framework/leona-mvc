@@ -1,6 +1,7 @@
 package com.tealeaf.leona.mvc.client.properties;
 
 import com.google.common.base.CaseFormat;
+import com.tealeaf.leona.mvc.client.ClientAutoConfigurationSource;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -67,13 +68,13 @@ public class RestClientBeanProcessor implements BeanPostProcessor {
         return restTemplate;
     }
 
-    @Bean
-    @ConfigurationProperties("leona.clients")
-    public Map<String, RestClientConfig> getClientConfigs() {
-        return new HashMap<>();
-    }
 
     private RestClientConfig getProperties(String prefix) {
+        if (!prefix.startsWith(ClientAutoConfigurationSource.CONFIGURATION_QUALIFIER)) {
+            if (prefix.endsWith(".")) prefix = ClientAutoConfigurationSource.CONFIGURATION_QUALIFIER + prefix;
+            else prefix = ClientAutoConfigurationSource.CONFIGURATION_QUALIFIER + "." + prefix;
+        }
+
         String beanIdentifier = prefix + "-" + CONFIG_CLASS.getName();
         if (applicationContext.containsBean(beanIdentifier))
             return applicationContext.getBean(beanIdentifier, CONFIG_CLASS);

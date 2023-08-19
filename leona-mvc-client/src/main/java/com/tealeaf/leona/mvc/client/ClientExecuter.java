@@ -47,8 +47,7 @@ public abstract class ClientExecuter implements ApplicationContextAware {
 
         String clientName = clientConfig.getClientName();
         if (StringUtils.isBlank(clientName)) {
-            clientName = Optional.ofNullable(this.getClass().getAnnotation(RestClient.class)).map(RestClient::value)
-                    .orElseThrow(() -> new IllegalArgumentException("clientName must be not-null and not empty."));
+            clientName = this.getClass().getSimpleName();
         }
 
         this.clientName = clientName;
