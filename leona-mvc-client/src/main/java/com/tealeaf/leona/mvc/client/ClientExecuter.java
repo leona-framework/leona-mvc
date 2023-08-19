@@ -1,12 +1,10 @@
 package com.tealeaf.leona.mvc.client;
 
 import com.tealeaf.leona.mvc.client.properties.RestClientConfig;
-import com.tealeaf.leona.mvc.client.properties.Resilience4JClientRetryConfig;
 import com.tealeaf.leona.mvc.client.properties.RestTemplateConfigInjectorHelper;
 import com.tealeaf.leona.mvc.client.retry.Retryer;
 import com.tealeaf.leona.mvc.components.containers.*;
-import com.tealeaf.leona.mvc.components.streams.LINQ;
-import io.github.resilience4j.retry.Retry;
+import com.tealeaf.leona.core.commons.streams.LINQ;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

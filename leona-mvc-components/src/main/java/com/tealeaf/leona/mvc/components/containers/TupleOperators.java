@@ -1,7 +1,7 @@
 package com.tealeaf.leona.mvc.components.containers;
 
-import com.tealeaf.leona.mvc.components.streams.LINQ;
-import com.tealeaf.leona.mvc.components.streams.LINQStream;
+import com.tealeaf.leona.core.commons.streams.LINQ;
+import com.tealeaf.leona.core.commons.streams.LINQStream;
 
 import java.util.Iterator;
 

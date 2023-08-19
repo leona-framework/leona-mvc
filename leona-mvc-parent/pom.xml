@@ -3,96 +3,106 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>leona-core-parent</artifactId>
-	<version>0.0.2</version>
-	<name>leona-core-modules</name>
-	<description>leona-core-modules</description>
+	<artifactId>leona-mvc-parent</artifactId>
+	<version>0.0.1</version>
+	<name>leona-mvc-parent</name>
+	<description>leona-mvc-parent</description>
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>../leona-core-commons</module>
-		<module>../leona-core-parent</module>
-		<module>../leona-core-utils</module>
-		<module>../leona-testing</module>
+		<module>../../leona-mvc</module>
+		<module>../leona-mvc-client</module>
+		<module>../leona-mvc-components</module>
+		<module>../leona-mvc-services</module>
+		<module>../leona-mvc-app-flow</module>
+		<module>../leona-mvc-testing</module>
+		<module>../leona-mvc-observability</module>
 	</modules>
 
 	<properties>
 		<java.version>17</java.version>
-		<guava.version>31.1-jre</guava.version>
-		<leona-core-commons.version>0.0.2</leona-core-commons.version>
-		<leona-core-modules.version>0.0.2</leona-core-modules.version>
-		<leona-core-utils.version>0.0.2</leona-core-utils.version>
-		<leona-testing.version>0.0.2</leona-testing.version>
+		<spring.version>3.1.2</spring.version>
+		<leona-mvc.version>0.0.1</leona-mvc.version>
+		<leona-core.version>0.0.2</leona-core.version>
 	</properties>
 
+	<parent>
+		<groupId>com.tealeaf.leona</groupId>
+		<artifactId>leona-core-parent</artifactId>
+		<version>0.0.2</version>
+		<relativePath>../../leona-core/leona-core-parent/pom.xml</relativePath> <!-- lookup parent from repository -->
+	</parent>
+
+
 	<dependencies>
+		<dependency>
+			<groupId>com.tealeaf.leona</groupId>
+			<artifactId>leona-core</artifactId>
+			<version>${leona-core.version}</version>
+			<optional>true</optional>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 
+		<!--Web MVC Dependency-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-aop</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>
-
+		<!--Various object validations (Jakarta)-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+		</dependency>
+
+		<!--Guava-->
+		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>
 	</dependencies>
 
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>com.tealeaf.leona</groupId>
-				<artifactId>leona-core-commons</artifactId>
-				<version>${leona-core-commons.version}</version>
+				<artifactId>leona-mvc-services</artifactId>
+				<version>0.0.1</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.tealeaf.leona</groupId>
-				<artifactId>leona-core-modules</artifactId>
-				<version>${leona-core-modules.version}</version>
+				<artifactId>leona-mvc-components</artifactId>
+				<version>0.0.1</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.tealeaf.leona</groupId>
-				<artifactId>leona-core-utils</artifactId>
-				<version>${leona-core-utils.version}</version>
+				<artifactId>leona-mvc-app-flow</artifactId>
+				<version>0.0.1</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.tealeaf.leona</groupId>
-				<artifactId>leona-testing</artifactId>
-				<version>${leona-testing.version}</version>
+				<artifactId>leona-mvc-testing</artifactId>
+				<version>0.0.1</version>
 			</dependency>
-
 			<dependency>
-				<groupId>com.google.guava</groupId>
-				<artifactId>guava</artifactId>
-				<version>${guava.version}</version>
+				<groupId>com.tealeaf.leona</groupId>
+				<artifactId>leona-mvc-client</artifactId>
+				<version>0.0.1</version>
 			</dependency>
-
+			<dependency>
+				<groupId>com.tealeaf.leona</groupId>
+				<artifactId>leona-common</artifactId>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

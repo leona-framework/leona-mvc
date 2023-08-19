@@ -1,6 +1,6 @@
 package com.tealeaf.leona.mvc.client;
 
-import com.tealeaf.leona.mvc.components.streams.LINQ;
+import com.tealeaf.leona.core.commons.streams.LINQ;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.http.HttpHeaders;
@@ -11,7 +11,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;

@@ -1,7 +1,8 @@
 package com.tealeaf.leona.mvc.components.containers;
 
-import com.tealeaf.leona.mvc.components.streams.LINQ;
-import com.tealeaf.leona.mvc.components.streams.LINQStream;
+
+import com.tealeaf.leona.core.commons.streams.LINQ;
+import com.tealeaf.leona.core.commons.streams.LINQStream;
 
 import java.util.*;
 
@@ -35,7 +36,7 @@ public class SimpleContext implements Context {
     }
 
     @Override
-    public LINQStream<Map.Entry<Object, Object>> stream() {
+    public LINQStream<Entry<Object, Object>> stream() {
         return LINQ.stream(objectMap.entrySet());
     }
 
