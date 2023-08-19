@@ -1,1 +1,1 @@
-com.tealeaf.leona.mvc.services.LeonaServiceAutoConfiguration
+org.lyora.leona.mvc.services.LeonaServiceAutoConfiguration

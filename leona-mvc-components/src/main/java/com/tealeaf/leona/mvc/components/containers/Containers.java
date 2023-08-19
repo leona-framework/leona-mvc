@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.components.containers;
+package org.lyora.leona.mvc.components.containers;
 
 public class Containers {
     public static <T1, T2> Tuple<T1, T2> of(T1 item1, T2 item2) {

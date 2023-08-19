@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.components;
+package org.lyora.leona.mvc.components;
 
 public record EventType(String value) {
     public static final EventType ENTRY = new EventType("ENTRY");

@@ -1,8 +1,8 @@
-package com.tealeaf.leona.mvc.client.flow;
+package org.lyora.leona.mvc.client.flow;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.tealeaf.leona.mvc.client.serializers.FlowCapturerDeserializer;
-import com.tealeaf.leona.mvc.components.captures.DefaultCapturePlan;
+import org.lyora.leona.mvc.client.serializers.FlowCapturerDeserializer;
+import org.lyora.leona.mvc.components.captures.DefaultCapturePlan;
 import lombok.Getter;
 import lombok.Setter;
 

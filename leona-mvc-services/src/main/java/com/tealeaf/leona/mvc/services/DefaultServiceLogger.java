@@ -1,9 +1,9 @@
-package com.tealeaf.leona.mvc.services;
+package org.lyora.leona.mvc.services;
 
-import com.tealeaf.leona.mvc.components.containers.ExecutionView;
-import com.tealeaf.leona.mvc.components.utils.ClassConstructor;
-import com.tealeaf.leona.mvc.services.logging.LoggerConfiguration;
-import com.tealeaf.leona.mvc.services.logging.MdcAwareServiceLogger;
+import org.lyora.leona.mvc.components.containers.ExecutionView;
+import org.lyora.leona.mvc.components.utils.ClassConstructor;
+import org.lyora.leona.mvc.services.logging.LoggerConfiguration;
+import org.lyora.leona.mvc.services.logging.MdcAwareServiceLogger;
 import org.slf4j.Logger;
 import org.slf4j.event.Level;
 

@@ -1,8 +1,8 @@
-package com.tealeaf.leona.mvc.client;
+package org.lyora.leona.mvc.client;
 
-import com.tealeaf.leona.mvc.client.logging.LoggerConfiguration;
-import com.tealeaf.leona.mvc.client.logging.MdcAwareClientLogger;
-import com.tealeaf.leona.mvc.components.utils.ClassConstructor;
+import org.lyora.leona.mvc.client.logging.LoggerConfiguration;
+import org.lyora.leona.mvc.client.logging.MdcAwareClientLogger;
+import org.lyora.leona.mvc.components.utils.ClassConstructor;
 import org.slf4j.Logger;
 import org.slf4j.event.Level;
 

@@ -1,10 +1,10 @@
-package com.tealeaf.firefly.mvc.services;
+package org.lyora.firefly.mvc.services;
 
-import com.tealeaf.leona.mvc.components.containers.ExecutionView;
-import com.tealeaf.leona.mvc.components.containers.TupleOperators;
-import com.tealeaf.leona.mvc.services.AsyncService;
-import com.tealeaf.leona.mvc.services.ServiceMetadata;
-import com.tealeaf.leona.mvc.services.ServiceMetadataProvider;
+import org.lyora.leona.mvc.components.containers.ExecutionView;
+import org.lyora.leona.mvc.components.containers.TupleOperators;
+import org.lyora.leona.mvc.services.AsyncService;
+import org.lyora.leona.mvc.services.ServiceMetadata;
+import org.lyora.leona.mvc.services.ServiceMetadataProvider;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;

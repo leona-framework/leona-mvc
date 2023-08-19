@@ -1,6 +1,6 @@
-package com.tealeaf.leona.mvc.client;
+package org.lyora.leona.mvc.client;
 
-import com.tealeaf.leona.core.commons.streams.LINQ;
+import org.lyora.leona.core.commons.streams.LINQ;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.http.HttpHeaders;

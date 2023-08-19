@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.services;
+package org.lyora.leona.mvc.services;
 
 public enum ExecutionType {
     SYNCHRONOUS,

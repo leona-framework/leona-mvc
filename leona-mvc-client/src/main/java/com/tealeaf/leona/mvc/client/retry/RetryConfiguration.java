@@ -1,6 +1,6 @@
-package com.tealeaf.leona.mvc.client.retry;
+package org.lyora.leona.mvc.client.retry;
 
-import com.tealeaf.leona.mvc.client.properties.Resilience4JClientRetryConfig;
+import org.lyora.leona.mvc.client.properties.Resilience4JClientRetryConfig;
 import lombok.Data;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 

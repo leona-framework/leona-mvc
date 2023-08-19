@@ -1,11 +1,11 @@
-package com.tealeaf.leona.mvc.services.flow;
+package org.lyora.leona.mvc.services.flow;
 
-import com.tealeaf.leona.mvc.components.Decorators;
-import com.tealeaf.leona.mvc.components.containers.Context;
-import com.tealeaf.leona.mvc.flow.InterceptedRequestView;
-import com.tealeaf.leona.mvc.services.ExecutionType;
-import com.tealeaf.leona.mvc.services.ServiceExecutionFilter;
-import com.tealeaf.leona.mvc.services.ServiceMetadata;
+import org.lyora.leona.mvc.components.Decorators;
+import org.lyora.leona.mvc.components.containers.Context;
+import org.lyora.leona.mvc.flow.InterceptedRequestView;
+import org.lyora.leona.mvc.services.ExecutionType;
+import org.lyora.leona.mvc.services.ServiceExecutionFilter;
+import org.lyora.leona.mvc.services.ServiceMetadata;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
 import java.util.function.Supplier;

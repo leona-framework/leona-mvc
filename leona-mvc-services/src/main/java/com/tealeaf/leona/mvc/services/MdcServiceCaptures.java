@@ -1,9 +1,9 @@
-package com.tealeaf.leona.mvc.services;
+package org.lyora.leona.mvc.services;
 
-import com.tealeaf.leona.mvc.components.EventType;
-import com.tealeaf.leona.mvc.components.MdcLoggingConstants;
-import com.tealeaf.leona.mvc.components.captures.DefaultCapturePlan;
-import com.tealeaf.leona.mvc.services.logging.ServiceCapturePlan;
+import org.lyora.leona.mvc.components.EventType;
+import org.lyora.leona.mvc.components.MdcLoggingConstants;
+import org.lyora.leona.mvc.components.captures.DefaultCapturePlan;
+import org.lyora.leona.mvc.services.logging.ServiceCapturePlan;
 import org.springframework.http.HttpStatus;
 
 class MdcServiceCaptures extends DefaultCapturePlan<ServiceExecutionView<?>> implements ServiceCapturePlan {

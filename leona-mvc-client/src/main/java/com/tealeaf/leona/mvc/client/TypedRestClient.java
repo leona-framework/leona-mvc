@@ -1,6 +1,6 @@
-package com.tealeaf.leona.mvc.client;
+package org.lyora.leona.mvc.client;
 
-import com.tealeaf.leona.mvc.client.properties.RestClientConfig;
+import org.lyora.leona.mvc.client.properties.RestClientConfig;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;

@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.components;
+package org.lyora.leona.mvc.components;
 
 import org.slf4j.MDC.MDCCloseable;
 

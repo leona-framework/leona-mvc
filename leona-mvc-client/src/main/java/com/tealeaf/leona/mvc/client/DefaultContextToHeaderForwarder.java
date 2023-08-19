@@ -1,7 +1,7 @@
-package com.tealeaf.leona.mvc.client;
+package org.lyora.leona.mvc.client;
 
-import com.tealeaf.leona.mvc.client.flow.ContextToHeaderForwarder;
-import com.tealeaf.leona.mvc.client.flow.FlowCapturer;
+import org.lyora.leona.mvc.client.flow.ContextToHeaderForwarder;
+import org.lyora.leona.mvc.client.flow.FlowCapturer;
 
 import java.util.List;
 

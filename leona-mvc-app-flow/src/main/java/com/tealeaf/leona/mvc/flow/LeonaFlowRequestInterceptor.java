@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.flow;
+package org.lyora.leona.mvc.flow;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 

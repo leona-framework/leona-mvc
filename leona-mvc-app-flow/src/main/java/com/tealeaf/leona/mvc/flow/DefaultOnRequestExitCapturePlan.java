@@ -1,8 +1,8 @@
-package com.tealeaf.leona.mvc.flow;
+package org.lyora.leona.mvc.flow;
 
-import com.tealeaf.leona.mvc.components.EventType;
-import com.tealeaf.leona.mvc.components.MdcLoggingConstants;
-import com.tealeaf.leona.mvc.components.captures.DefaultCapturePlan;
+import org.lyora.leona.mvc.components.EventType;
+import org.lyora.leona.mvc.components.MdcLoggingConstants;
+import org.lyora.leona.mvc.components.captures.DefaultCapturePlan;
 
 class DefaultOnRequestExitCapturePlan extends DefaultCapturePlan<InterceptedRequestView> implements OnRequestExitCapturePlan {
     public DefaultOnRequestExitCapturePlan() {

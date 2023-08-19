@@ -1,6 +1,6 @@
-package com.tealeaf.leona.mvc.services;
+package org.lyora.leona.mvc.services;
 
-import com.tealeaf.leona.mvc.services.logging.LoggerConfiguration;
+import org.lyora.leona.mvc.services.logging.LoggerConfiguration;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;

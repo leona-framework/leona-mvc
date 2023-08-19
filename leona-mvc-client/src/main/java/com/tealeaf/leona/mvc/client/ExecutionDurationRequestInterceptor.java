@@ -1,6 +1,6 @@
-package com.tealeaf.leona.mvc.client;
+package org.lyora.leona.mvc.client;
 
-import com.tealeaf.leona.mvc.components.containers.Context;
+import org.lyora.leona.mvc.components.containers.Context;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;

@@ -20,7 +20,7 @@
     <!-- FIREFLY PARENT  -->
     <!-- - - - - - - - - -->
     <parent>
-        <groupId>com.tealeaf.leona</groupId>
+        <groupId>org.lyora.leona</groupId>
         <artifactId>leona-mvc-parent</artifactId>
         <version>0.0.1</version>
         <relativePath>../leona-mvc-parent/pom.xml</relativePath> <!-- lookup parent from repository -->

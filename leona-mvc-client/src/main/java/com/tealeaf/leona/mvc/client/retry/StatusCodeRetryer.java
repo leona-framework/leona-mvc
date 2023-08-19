@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.client.retry;
+package org.lyora.leona.mvc.client.retry;
 
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;

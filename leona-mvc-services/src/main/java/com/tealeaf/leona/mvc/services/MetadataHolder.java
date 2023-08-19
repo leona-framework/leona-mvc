@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.services;
+package org.lyora.leona.mvc.services;
 
 import io.micrometer.common.util.StringUtils;
 import org.slf4j.LoggerFactory;

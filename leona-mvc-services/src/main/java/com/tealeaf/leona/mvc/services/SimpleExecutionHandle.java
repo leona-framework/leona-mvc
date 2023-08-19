@@ -1,6 +1,6 @@
-package com.tealeaf.leona.mvc.services;
+package org.lyora.leona.mvc.services;
 
-import com.tealeaf.leona.mvc.components.containers.*;
+import org.lyora.leona.mvc.components.containers.*;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;

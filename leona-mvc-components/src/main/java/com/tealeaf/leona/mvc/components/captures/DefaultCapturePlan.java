@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.components.captures;
+package org.lyora.leona.mvc.components.captures;
 
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;

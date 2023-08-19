@@ -1,7 +1,7 @@
 /*
-package com.tealeaf.mvc.components.containers;
+package org.lyora.mvc.components.containers;
 
-import com.tealeaf.leona.mvc.components.containers.Tuple;
+import org.lyora.leona.mvc.components.containers.Tuple;
 import org.junit.jupiter.api.Test;
 
 public class TupleOperatorsTest {

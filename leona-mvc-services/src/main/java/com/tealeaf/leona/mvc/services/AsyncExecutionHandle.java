@@ -1,7 +1,7 @@
-package com.tealeaf.leona.mvc.services;
+package org.lyora.leona.mvc.services;
 
-import com.tealeaf.leona.mvc.components.containers.ExecutionView;
-import com.tealeaf.leona.mvc.components.containers.Tuple;
+import org.lyora.leona.mvc.components.containers.ExecutionView;
+import org.lyora.leona.mvc.components.containers.Tuple;
 
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;

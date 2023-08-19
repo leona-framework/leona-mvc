@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.client;
+package org.lyora.leona.mvc.client;
 
 public class MvcLeonaConstants {
     public static final String REQUEST_DURATION_KEY = "REQUEST_DURATION_KEY";

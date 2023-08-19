@@ -1,6 +1,6 @@
-package com.tealeaf.leona.mvc.client.retry;
+package org.lyora.leona.mvc.client.retry;
 
-import com.tealeaf.leona.mvc.client.ClientAutoConfigurationSource;
+import org.lyora.leona.mvc.client.ClientAutoConfigurationSource;
 import io.github.resilience4j.retry.RetryRegistry;
 import io.github.resilience4j.springboot3.retry.autoconfigure.RetryAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;

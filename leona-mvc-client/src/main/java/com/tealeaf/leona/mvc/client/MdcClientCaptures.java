@@ -1,9 +1,9 @@
-package com.tealeaf.leona.mvc.client;
+package org.lyora.leona.mvc.client;
 
-import com.tealeaf.leona.mvc.client.logging.ClientCapturePlan;
-import com.tealeaf.leona.mvc.components.EventType;
-import com.tealeaf.leona.mvc.components.MdcLoggingConstants;
-import com.tealeaf.leona.mvc.components.captures.DefaultCapturePlan;
+import org.lyora.leona.mvc.client.logging.ClientCapturePlan;
+import org.lyora.leona.mvc.components.EventType;
+import org.lyora.leona.mvc.components.MdcLoggingConstants;
+import org.lyora.leona.mvc.components.captures.DefaultCapturePlan;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpStatusCodeException;
 

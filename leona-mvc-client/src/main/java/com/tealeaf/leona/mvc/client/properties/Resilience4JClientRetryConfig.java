@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.client.properties;
+package org.lyora.leona.mvc.client.properties;
 
 import io.github.resilience4j.common.retry.configuration.CommonRetryConfigurationProperties;
 import io.github.resilience4j.common.utils.ConfigUtils;

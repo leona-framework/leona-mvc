@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.client.retry;
+package org.lyora.leona.mvc.client.retry;
 
 import lombok.Data;
 import org.slf4j.event.Level;

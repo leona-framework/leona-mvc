@@ -1,10 +1,10 @@
-package com.tealeaf.leona.mvc.client.logging;
+package org.lyora.leona.mvc.client.logging;
 
-import com.tealeaf.leona.mvc.client.*;
-import com.tealeaf.leona.mvc.components.MdcContextSupplier;
-import com.tealeaf.leona.core.commons.Priority;
-import com.tealeaf.leona.mvc.components.captures.MdcCaptureFilter;
-import com.tealeaf.leona.mvc.components.containers.Context;
+import org.lyora.leona.mvc.client.*;
+import org.lyora.leona.mvc.components.MdcContextSupplier;
+import org.lyora.leona.core.commons.Priority;
+import org.lyora.leona.mvc.components.captures.MdcCaptureFilter;
+import org.lyora.leona.mvc.components.containers.Context;
 import jakarta.annotation.Nullable;
 import org.springframework.http.ResponseEntity;
 

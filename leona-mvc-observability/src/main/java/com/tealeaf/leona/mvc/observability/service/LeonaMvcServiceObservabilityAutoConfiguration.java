@@ -1,6 +1,6 @@
-package com.tealeaf.leona.mvc.observability.service;
+package org.lyora.leona.mvc.observability.service;
 
-import com.tealeaf.leona.mvc.services.MetadataHolder;
+import org.lyora.leona.mvc.services.MetadataHolder;
 import io.micrometer.observation.ObservationRegistry;
 import org.springframework.boot.actuate.autoconfigure.observation.ObservationAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

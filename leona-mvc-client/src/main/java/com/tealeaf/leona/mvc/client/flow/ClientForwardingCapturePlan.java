@@ -1,6 +1,6 @@
-package com.tealeaf.leona.mvc.client.flow;
+package org.lyora.leona.mvc.client.flow;
 
-import com.tealeaf.leona.mvc.components.captures.DefaultCapturePlan;
+import org.lyora.leona.mvc.components.captures.DefaultCapturePlan;
 
 import java.util.Map;
 

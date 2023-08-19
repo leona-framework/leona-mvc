@@ -1,10 +1,10 @@
-package com.tealeaf.leona.mvc.client;
+package org.lyora.leona.mvc.client;
 
-import com.tealeaf.leona.mvc.client.flow.FlowCapturer;
-import com.tealeaf.leona.mvc.client.logging.LoggerConfiguration;
-import com.tealeaf.leona.mvc.client.properties.RestClientConfig;
-import com.tealeaf.leona.mvc.client.retry.RetryConfiguration;
-import com.tealeaf.leona.mvc.components.MdcLoggingConstants;
+import org.lyora.leona.mvc.client.flow.FlowCapturer;
+import org.lyora.leona.mvc.client.logging.LoggerConfiguration;
+import org.lyora.leona.mvc.client.properties.RestClientConfig;
+import org.lyora.leona.mvc.client.retry.RetryConfiguration;
+import org.lyora.leona.mvc.components.MdcLoggingConstants;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;

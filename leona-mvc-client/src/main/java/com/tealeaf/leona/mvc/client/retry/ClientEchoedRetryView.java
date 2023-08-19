@@ -1,9 +1,9 @@
-package com.tealeaf.leona.mvc.client.retry;
+package org.lyora.leona.mvc.client.retry;
 
-import com.tealeaf.leona.mvc.client.ClientExecuter;
-import com.tealeaf.leona.mvc.client.ClientExecutionView;
-import com.tealeaf.leona.mvc.client.Request;
-import com.tealeaf.leona.mvc.components.containers.ContextView;
+import org.lyora.leona.mvc.client.ClientExecuter;
+import org.lyora.leona.mvc.client.ClientExecutionView;
+import org.lyora.leona.mvc.client.Request;
+import org.lyora.leona.mvc.components.containers.ContextView;
 import io.github.resilience4j.retry.event.RetryOnRetryEvent;
 import org.springframework.http.ResponseEntity;
 

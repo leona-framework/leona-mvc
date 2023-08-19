@@ -1,7 +1,7 @@
-package com.tealeaf.leona.mvc.client.properties;
+package org.lyora.leona.mvc.client.properties;
 
 import com.google.common.base.CaseFormat;
-import com.tealeaf.leona.mvc.client.ClientAutoConfigurationSource;
+import org.lyora.leona.mvc.client.ClientAutoConfigurationSource;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;

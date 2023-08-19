@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.client;
+package org.lyora.leona.mvc.client;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

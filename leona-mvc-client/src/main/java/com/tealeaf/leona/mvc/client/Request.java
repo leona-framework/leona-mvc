@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.client;
+package org.lyora.leona.mvc.client;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;

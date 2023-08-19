@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.client;
+package org.lyora.leona.mvc.client;
 
 import java.util.List;
 

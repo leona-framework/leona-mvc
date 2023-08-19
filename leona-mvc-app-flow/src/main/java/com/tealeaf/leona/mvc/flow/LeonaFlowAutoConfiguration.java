@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.flow;
+package org.lyora.leona.mvc.flow;
 
 import io.micrometer.tracing.brave.bridge.BraveTracer;
 import org.springframework.boot.actuate.autoconfigure.tracing.ConditionalOnEnabledTracing;

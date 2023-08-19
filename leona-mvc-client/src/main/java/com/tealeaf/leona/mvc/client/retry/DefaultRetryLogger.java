@@ -1,6 +1,6 @@
-package com.tealeaf.leona.mvc.client.retry;
+package org.lyora.leona.mvc.client.retry;
 
-import com.tealeaf.leona.mvc.components.utils.ClassConstructor;
+import org.lyora.leona.mvc.components.utils.ClassConstructor;
 import org.slf4j.Logger;
 import org.slf4j.event.Level;
 

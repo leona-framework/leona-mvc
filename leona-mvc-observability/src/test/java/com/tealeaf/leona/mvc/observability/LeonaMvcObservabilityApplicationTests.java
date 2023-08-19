@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.observability;
+package org.lyora.leona.mvc.observability;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

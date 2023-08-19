@@ -27,7 +27,7 @@
 	</properties>
 
 	<parent>
-		<groupId>com.tealeaf.leona</groupId>
+		<groupId>org.lyora.leona</groupId>
 		<artifactId>leona-core-parent</artifactId>
 		<version>0.0.2</version>
 		<relativePath>../../leona-core/leona-core-parent/pom.xml</relativePath> <!-- lookup parent from repository -->
@@ -36,7 +36,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.tealeaf.leona</groupId>
+			<groupId>org.lyora.leona</groupId>
 			<artifactId>leona-core</artifactId>
 			<version>${leona-core.version}</version>
 			<optional>true</optional>
@@ -75,32 +75,32 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>com.tealeaf.leona</groupId>
+				<groupId>org.lyora.leona</groupId>
 				<artifactId>leona-mvc-services</artifactId>
 				<version>0.0.1</version>
 			</dependency>
 			<dependency>
-				<groupId>com.tealeaf.leona</groupId>
+				<groupId>org.lyora.leona</groupId>
 				<artifactId>leona-mvc-components</artifactId>
 				<version>0.0.1</version>
 			</dependency>
 			<dependency>
-				<groupId>com.tealeaf.leona</groupId>
+				<groupId>org.lyora.leona</groupId>
 				<artifactId>leona-mvc-app-flow</artifactId>
 				<version>0.0.1</version>
 			</dependency>
 			<dependency>
-				<groupId>com.tealeaf.leona</groupId>
+				<groupId>org.lyora.leona</groupId>
 				<artifactId>leona-mvc-testing</artifactId>
 				<version>0.0.1</version>
 			</dependency>
 			<dependency>
-				<groupId>com.tealeaf.leona</groupId>
+				<groupId>org.lyora.leona</groupId>
 				<artifactId>leona-mvc-client</artifactId>
 				<version>0.0.1</version>
 			</dependency>
 			<dependency>
-				<groupId>com.tealeaf.leona</groupId>
+				<groupId>org.lyora.leona</groupId>
 				<artifactId>leona-common</artifactId>
 			</dependency>
 		</dependencies>

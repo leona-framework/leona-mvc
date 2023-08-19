@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.client.properties;
+package org.lyora.leona.mvc.client.properties;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

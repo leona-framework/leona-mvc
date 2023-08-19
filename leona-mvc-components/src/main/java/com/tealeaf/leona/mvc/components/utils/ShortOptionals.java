@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.components.utils;
+package org.lyora.leona.mvc.components.utils;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;

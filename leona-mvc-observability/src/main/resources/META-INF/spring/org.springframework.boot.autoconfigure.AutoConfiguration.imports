@@ -1,1 +1,1 @@
-com.tealeaf.leona.mvc.observability.service.LeonaMvcServiceObservabilityAutoConfiguration
+org.lyora.leona.mvc.observability.service.LeonaMvcServiceObservabilityAutoConfiguration

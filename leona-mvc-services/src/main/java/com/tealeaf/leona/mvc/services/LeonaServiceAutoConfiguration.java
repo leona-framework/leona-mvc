@@ -1,11 +1,11 @@
-package com.tealeaf.leona.mvc.services;
+package org.lyora.leona.mvc.services;
 
-import com.tealeaf.leona.mvc.flow.InterceptedRequestView;
-import com.tealeaf.leona.mvc.services.flow.FlowSupplierDecorator;
-import com.tealeaf.leona.mvc.services.logging.LoggerConfiguration;
-import com.tealeaf.leona.mvc.services.logging.MdcServiceCaptureFilter;
-import com.tealeaf.leona.mvc.services.logging.ServiceCapturePlan;
-import com.tealeaf.leona.mvc.services.logging.ServiceLogger;
+import org.lyora.leona.mvc.flow.InterceptedRequestView;
+import org.lyora.leona.mvc.services.flow.FlowSupplierDecorator;
+import org.lyora.leona.mvc.services.logging.LoggerConfiguration;
+import org.lyora.leona.mvc.services.logging.MdcServiceCaptureFilter;
+import org.lyora.leona.mvc.services.logging.ServiceCapturePlan;
+import org.lyora.leona.mvc.services.logging.ServiceLogger;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

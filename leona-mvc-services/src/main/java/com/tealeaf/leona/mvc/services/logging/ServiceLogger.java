@@ -1,7 +1,7 @@
-package com.tealeaf.leona.mvc.services.logging;
+package org.lyora.leona.mvc.services.logging;
 
-import com.tealeaf.leona.mvc.services.ServiceExecutionFilter;
-import com.tealeaf.leona.mvc.services.ServiceExecutionView;
+import org.lyora.leona.mvc.services.ServiceExecutionFilter;
+import org.lyora.leona.mvc.services.ServiceExecutionView;
 import org.slf4j.Logger;
 
 public interface ServiceLogger extends ServiceExecutionFilter {

@@ -1,6 +1,6 @@
-package com.tealeaf.leona.mvc.client;
+package org.lyora.leona.mvc.client;
 
-import com.tealeaf.leona.core.commons.Priority;
+import org.lyora.leona.core.commons.Priority;
 
 @FunctionalInterface
 public interface PreExchangeExecutionFilter {

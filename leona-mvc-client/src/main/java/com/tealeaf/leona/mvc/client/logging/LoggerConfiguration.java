@@ -1,6 +1,6 @@
-package com.tealeaf.leona.mvc.client.logging;
+package org.lyora.leona.mvc.client.logging;
 
-import com.tealeaf.leona.mvc.client.ClientExecutionView;
+import org.lyora.leona.mvc.client.ClientExecutionView;
 import lombok.Data;
 import org.slf4j.event.Level;
 

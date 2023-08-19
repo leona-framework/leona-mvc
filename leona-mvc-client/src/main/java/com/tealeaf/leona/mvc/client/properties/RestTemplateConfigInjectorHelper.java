@@ -1,6 +1,6 @@
-package com.tealeaf.leona.mvc.client.properties;
+package org.lyora.leona.mvc.client.properties;
 
-import com.tealeaf.leona.core.commons.streams.LINQ;
+import org.lyora.leona.core.commons.streams.LINQ;
 import jakarta.validation.*;
 import org.springframework.web.client.RestTemplate;
 

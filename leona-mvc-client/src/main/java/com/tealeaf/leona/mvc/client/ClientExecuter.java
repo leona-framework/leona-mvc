@@ -1,10 +1,10 @@
-package com.tealeaf.leona.mvc.client;
+package org.lyora.leona.mvc.client;
 
-import com.tealeaf.leona.core.commons.streams.LINQ;
-import com.tealeaf.leona.mvc.client.properties.RestClientConfig;
-import com.tealeaf.leona.mvc.client.properties.RestTemplateConfigInjectorHelper;
-import com.tealeaf.leona.mvc.client.retry.Retryer;
-import com.tealeaf.leona.mvc.components.containers.*;
+import org.lyora.leona.core.commons.streams.LINQ;
+import org.lyora.leona.mvc.client.properties.RestClientConfig;
+import org.lyora.leona.mvc.client.properties.RestTemplateConfigInjectorHelper;
+import org.lyora.leona.mvc.client.retry.Retryer;
+import org.lyora.leona.mvc.components.containers.*;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

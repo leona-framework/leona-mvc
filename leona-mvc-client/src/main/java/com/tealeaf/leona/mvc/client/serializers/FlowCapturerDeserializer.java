@@ -1,11 +1,11 @@
-package com.tealeaf.leona.mvc.client.serializers;
+package org.lyora.leona.mvc.client.serializers;
 
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.tealeaf.leona.mvc.client.flow.FlowCapturer;
+import org.lyora.leona.mvc.client.flow.FlowCapturer;
 
 import java.io.IOException;
 

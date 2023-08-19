@@ -1,4 +1,4 @@
-package com.tealeaf.leona.mvc.components;
+package org.lyora.leona.mvc.components;
 
 public class MdcLoggingConstants {
     public static final String BACKEND_NAME = "backendName";

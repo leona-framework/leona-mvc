@@ -1,7 +1,7 @@
-package com.tealeaf.leona.mvc.services;
+package org.lyora.leona.mvc.services;
 
-import com.tealeaf.leona.mvc.components.Decorators;
-import com.tealeaf.leona.core.commons.VoidLike;
+import org.lyora.leona.mvc.components.Decorators;
+import org.lyora.leona.core.commons.VoidLike;
 
 import java.util.List;
 import java.util.function.Supplier;

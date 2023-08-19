@@ -1,6 +1,6 @@
-package com.tealeaf.leona.mvc.components.captures;
+package org.lyora.leona.mvc.components.captures;
 
-import com.tealeaf.leona.mvc.components.captures.CapturePlan;
+import org.lyora.leona.mvc.components.captures.CapturePlan;
 
 import java.util.Objects;
 

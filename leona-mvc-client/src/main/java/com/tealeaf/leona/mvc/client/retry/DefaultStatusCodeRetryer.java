@@ -1,11 +1,11 @@
-package com.tealeaf.leona.mvc.client.retry;
+package org.lyora.leona.mvc.client.retry;
 
 import com.google.common.collect.Sets;
-import com.tealeaf.leona.mvc.client.ClientExecuter;
-import com.tealeaf.leona.mvc.client.ClientExecutionView;
-import com.tealeaf.leona.mvc.client.PostExchangeExecutionFilter;
-import com.tealeaf.leona.mvc.client.properties.Resilience4JClientRetryConfig;
-import com.tealeaf.leona.core.commons.Priority;
+import org.lyora.leona.mvc.client.ClientExecuter;
+import org.lyora.leona.mvc.client.ClientExecutionView;
+import org.lyora.leona.mvc.client.PostExchangeExecutionFilter;
+import org.lyora.leona.mvc.client.properties.Resilience4JClientRetryConfig;
+import org.lyora.leona.core.commons.Priority;
 import io.github.resilience4j.common.CompositeCustomizer;
 import io.github.resilience4j.common.retry.configuration.CommonRetryConfigurationProperties;
 import io.github.resilience4j.common.retry.configuration.RetryConfigCustomizer;

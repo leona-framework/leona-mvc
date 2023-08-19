@@ -1,7 +1,7 @@
-package com.tealeaf.leona.mvc.services.logging;
+package org.lyora.leona.mvc.services.logging;
 
-import com.tealeaf.leona.mvc.components.MdcContextSupplier;
-import com.tealeaf.leona.mvc.services.ServiceExecutionView;
+import org.lyora.leona.mvc.components.MdcContextSupplier;
+import org.lyora.leona.mvc.services.ServiceExecutionView;
 import org.slf4j.MDC.MDCCloseable;
 
 import java.util.List;

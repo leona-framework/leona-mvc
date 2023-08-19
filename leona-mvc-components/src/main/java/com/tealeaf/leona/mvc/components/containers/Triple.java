@@ -1,7 +1,7 @@
-package com.tealeaf.leona.mvc.components.containers;
+package org.lyora.leona.mvc.components.containers;
 
 import com.google.common.collect.Iterators;
-import com.tealeaf.leona.core.commons.streams.Streamable;
+import org.lyora.leona.core.commons.streams.Streamable;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Iterator;

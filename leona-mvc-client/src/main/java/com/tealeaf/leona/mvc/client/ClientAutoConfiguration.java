@@ -1,13 +1,13 @@
-package com.tealeaf.leona.mvc.client;
+package org.lyora.leona.mvc.client;
 
-import com.tealeaf.leona.mvc.client.flow.ContextToHeaderForwarder;
-import com.tealeaf.leona.mvc.client.logging.ClientCapturePlan;
-import com.tealeaf.leona.mvc.client.logging.ClientLogger;
-import com.tealeaf.leona.mvc.client.logging.LoggerConfiguration;
-import com.tealeaf.leona.mvc.client.logging.MdcClientCaptureFilter;
-import com.tealeaf.leona.mvc.client.properties.RestClientBeanProcessor;
-import com.tealeaf.leona.mvc.client.retry.ClientRetryAutoConfiguration;
-import com.tealeaf.leona.mvc.flow.InterceptedRequestView;
+import org.lyora.leona.mvc.client.flow.ContextToHeaderForwarder;
+import org.lyora.leona.mvc.client.logging.ClientCapturePlan;
+import org.lyora.leona.mvc.client.logging.ClientLogger;
+import org.lyora.leona.mvc.client.logging.LoggerConfiguration;
+import org.lyora.leona.mvc.client.logging.MdcClientCaptureFilter;
+import org.lyora.leona.mvc.client.properties.RestClientBeanProcessor;
+import org.lyora.leona.mvc.client.retry.ClientRetryAutoConfiguration;
+import org.lyora.leona.mvc.flow.InterceptedRequestView;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

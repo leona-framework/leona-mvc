@@ -1,6 +1,6 @@
-package com.tealeaf.leona.mvc.client.logging;
+package org.lyora.leona.mvc.client.logging;
 
-import com.tealeaf.leona.mvc.client.*;
+import org.lyora.leona.mvc.client.*;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 

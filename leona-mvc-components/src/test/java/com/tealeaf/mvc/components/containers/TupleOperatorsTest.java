@@ -1,10 +1,10 @@
 /*
-package com.tealeaf.mvc.components.containers;
+package org.lyora.mvc.components.containers;
 
-import com.tealeaf.leona.mvc.components.containers.Tuple;
-import com.tealeaf.leona.mvc.components.containers.TupleOperators;
-import com.tealeaf.leona.testing.FunctionSampler;
-import com.tealeaf.leona.testing.FunctionTimer;
+import org.lyora.leona.mvc.components.containers.Tuple;
+import org.lyora.leona.mvc.components.containers.TupleOperators;
+import org.lyora.leona.testing.FunctionSampler;
+import org.lyora.leona.testing.FunctionTimer;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 

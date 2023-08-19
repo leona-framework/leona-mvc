@@ -1,8 +1,8 @@
-package com.tealeaf.leona.mvc.observability.service;
+package org.lyora.leona.mvc.observability.service;
 
-import com.tealeaf.leona.mvc.components.containers.Context;
-import com.tealeaf.leona.mvc.services.ServiceExecutionFilter;
-import com.tealeaf.leona.mvc.services.ServiceMetadata;
+import org.lyora.leona.mvc.components.containers.Context;
+import org.lyora.leona.mvc.services.ServiceExecutionFilter;
+import org.lyora.leona.mvc.services.ServiceMetadata;
 import io.micrometer.observation.Observation;
 import io.micrometer.observation.ObservationRegistry;
 import lombok.RequiredArgsConstructor;
