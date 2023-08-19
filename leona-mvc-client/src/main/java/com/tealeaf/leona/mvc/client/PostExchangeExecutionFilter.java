@@ -1,6 +1,6 @@
 package com.tealeaf.leona.mvc.client;
 
-import com.tealeaf.leona.mvc.components.Priority;
+import com.tealeaf.leona.core.commons.Priority;
 import jakarta.annotation.Nullable;
 import org.springframework.http.ResponseEntity;
 

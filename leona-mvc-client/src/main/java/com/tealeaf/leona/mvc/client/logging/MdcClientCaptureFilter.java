@@ -2,7 +2,7 @@ package com.tealeaf.leona.mvc.client.logging;
 
 import com.tealeaf.leona.mvc.client.*;
 import com.tealeaf.leona.mvc.components.MdcContextSupplier;
-import com.tealeaf.leona.mvc.components.Priority;
+import com.tealeaf.leona.core.commons.Priority;
 import com.tealeaf.leona.mvc.components.captures.MdcCaptureFilter;
 import com.tealeaf.leona.mvc.components.containers.Context;
 import jakarta.annotation.Nullable;

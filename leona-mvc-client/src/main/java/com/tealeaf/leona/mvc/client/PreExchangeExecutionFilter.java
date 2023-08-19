@@ -1,6 +1,6 @@
 package com.tealeaf.leona.mvc.client;
 
-import com.tealeaf.leona.mvc.components.Priority;
+import com.tealeaf.leona.core.commons.Priority;
 
 @FunctionalInterface
 public interface PreExchangeExecutionFilter {

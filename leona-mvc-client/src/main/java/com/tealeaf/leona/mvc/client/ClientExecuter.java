@@ -1,10 +1,10 @@
 package com.tealeaf.leona.mvc.client;
 
+import com.tealeaf.leona.core.commons.streams.LINQ;
 import com.tealeaf.leona.mvc.client.properties.RestClientConfig;
 import com.tealeaf.leona.mvc.client.properties.RestTemplateConfigInjectorHelper;
 import com.tealeaf.leona.mvc.client.retry.Retryer;
 import com.tealeaf.leona.mvc.components.containers.*;
-import com.tealeaf.leona.core.commons.streams.LINQ;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -23,7 +23,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.Duration;
 import java.util.Comparator;
-import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;

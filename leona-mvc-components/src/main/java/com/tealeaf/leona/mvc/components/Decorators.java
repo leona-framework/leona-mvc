@@ -1,5 +1,6 @@
 package com.tealeaf.leona.mvc.components;
 
+import com.tealeaf.leona.core.commons.VoidLike;
 import com.tealeaf.leona.mvc.components.containers.Context;
 import com.tealeaf.leona.mvc.components.containers.ThreadContext;
 
