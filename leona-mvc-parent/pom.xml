@@ -4,10 +4,28 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>leona-mvc-parent</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<name>leona-mvc-parent</name>
-	<description>leona-mvc-parent</description>
+	<description>Parent for MVC-based leona libraries</description>
 	<packaging>pom</packaging>
+	<url>https://github.com/leona-framework/leona-mvc</url>
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>https://www.opensource.org/licenses/mit-license.php</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>Leona Framework Team</name>
+			<email>sylvona-admin@sylvona.com</email>
+			<organization>Sylvona</organization>
+			<organizationUrl>https://www.sylvona.com</organizationUrl>
+		</developer>
+	</developers>
+	<scm>
+		<url>https://github.com/leona-framework/leona-mvc/</url>
+	</scm>
 
 	<modules>
 		<module>../../leona-mvc</module>

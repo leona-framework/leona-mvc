@@ -3,9 +3,27 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>leona-mvc-services</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<name>leona-mvc-services</name>
-	<description>leona-mvc-services</description>
+	<description>Allows for the easy creation of service classes via interfaces with useful default methods</description>
+	<url>https://github.com/leona-framework/leona-mvc</url>
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>https://www.opensource.org/licenses/mit-license.php</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>Leona Framework Team</name>
+			<email>sylvona-admin@sylvona.com</email>
+			<organization>Sylvona</organization>
+			<organizationUrl>https://www.sylvona.com</organizationUrl>
+		</developer>
+	</developers>
+	<scm>
+		<url>https://github.com/leona-framework/leona-mvc/</url>
+	</scm>
 
 
 
@@ -23,7 +41,7 @@
 	<parent>
 		<groupId>com.sylvona.leona</groupId>
 		<artifactId>leona-mvc-parent</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.2</version>
 		<relativePath>../leona-mvc-parent/pom.xml</relativePath> <!-- lookup parent from repository -->
 	</parent>
 
