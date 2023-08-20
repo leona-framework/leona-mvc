@@ -40,7 +40,7 @@
 	<properties>
 		<java.version>17</java.version>
 		<spring.version>3.1.2</spring.version>
-		<leona-mvc.version>0.0.1</leona-mvc.version>
+		<leona-mvc.version>0.0.2</leona-mvc.version>
 		<leona-core.version>0.0.2</leona-core.version>
 	</properties>
 
@@ -78,31 +78,27 @@
 			<dependency>
 				<groupId>com.sylvona.leona</groupId>
 				<artifactId>leona-mvc-services</artifactId>
-				<version>0.0.1</version>
+				<version>0.0.2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.sylvona.leona</groupId>
 				<artifactId>leona-mvc-components</artifactId>
-				<version>0.0.1</version>
+				<version>0.0.2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.sylvona.leona</groupId>
 				<artifactId>leona-mvc-app-flow</artifactId>
-				<version>0.0.1</version>
+				<version>0.0.2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.sylvona.leona</groupId>
 				<artifactId>leona-mvc-testing</artifactId>
-				<version>0.0.1</version>
+				<version>0.0.2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.sylvona.leona</groupId>
 				<artifactId>leona-mvc-client</artifactId>
-				<version>0.0.1</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sylvona.leona</groupId>
-				<artifactId>leona-common</artifactId>
+				<version>0.0.2</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
