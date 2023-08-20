@@ -41,7 +41,7 @@ jobs:
     - name: Maven Build Parent and Children
       env:
         GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-      run: mvn -B clean compile package --file ./leona-core-parent/pom.xml
+      run: mvn -B clean compile package --file ./leona-mvc-parent/pom.xml
 
     - name: Publish All to Maven Central
       env:
