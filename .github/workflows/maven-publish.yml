@@ -6,6 +6,7 @@ name: Maven Package
 on:
   release:
     types: [created]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,18 +18,54 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 11
+
+    - name: Set up Java for publishing to GitHub Packages
       uses: actions/setup-java@v3
       with:
-        java-version: '11'
+        java-version: '17'
         distribution: 'temurin'
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
-
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
-
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+    - name: Publish to GitHub Packages
+      run: |
+        mvn \
+          -DaltReleaseDeploymentRepository=github::https://maven.pkg.github.com/leona-framework/leona-core \
+          -Dgithub-release=true --batch-mode deploy --file ./leona-mvc-parent/pom.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
+    
+    
+    - name: Set up Java for publishing to Maven Central
+      uses: actions/setup-java@v3
+      with:
+          java-version: '17'
+          distribution: 'temurin'
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+          gpg-passphrase: GPG_PASSPHRASE
+
+    - id: install-secret-key
+      name: Install GPG Secret Key
+      run: |
+        # Install gpg secret key
+        cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
+        
+    - name: Maven Build Parent and Children
+      env:
+        GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+      run: mvn -B clean compile package --file ./leona-core-parent/pom.xml
+
+    - name: Publish All to Maven Central
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+      run: |
+        mvn \
+          --no-transfer-progress \
+          --batch-mode \
+          -Dleona-maven-central-release=true \
+          -DaltSnapshotDeploymentRepository=ossrh::https://s01.oss.sonatype.org/content/repositories/snapshots/ \
+          -DaltReleaseDeploymentRepository=ossrh::https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/ \
+          -Darguments=-Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} \
+          verify install deploy gpg:sign --file ./leona-mvc-parent/pom.xml
+
