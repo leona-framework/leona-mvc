@@ -1,6 +1,6 @@
 package com.sylvona.leona.mvc.client.flow;
 
-import com.sylvona.leona.mvc.client.ClientExecuter;
+import com.sylvona.leona.mvc.client.RestClient;
 import com.sylvona.leona.mvc.client.ClientInitializationHook;
 import com.sylvona.leona.mvc.client.PreExchangeExecutionFilter;
 import com.sylvona.leona.mvc.client.Request;
@@ -11,14 +11,31 @@ import org.springframework.http.HttpHeaders;
 
 import java.util.List;
 
+/**
+ * Interface defining a pre-exchange execution filter that forwards context information from a {@link InterceptedRequestView}
+ * to HTTP headers in the outgoing request. This allows contextual information to be propagated across microservices.
+ * <p>
+ * Note: this interface is only applied IF the leona-app-flow library is in the classpath.
+ */
 @ConditionalOnClass(InterceptedRequestView.class)
 public interface ContextToHeaderForwarder extends PreExchangeExecutionFilter, ClientInitializationHook {
 
+    /**
+     * Adds the context forwarder to the list of {@link PreExchangeExecutionFilter} during {@link RestClient} initialization.
+     *
+     * @param clientModifier The client modifier to add the forwarder to.
+     */
     @Override
-    default void onInitialize(ClientExecuter.Modifier clientModifier) {
+    default void onInitialize(RestClient.Modifier clientModifier) {
         clientModifier.getPreExecutionFilters().add(this);
     }
 
+    /**
+     * Processes a {@link Request} extracting context information from the app-flow context and adding it to the outgoing request headers.
+     *
+     * @param request The prepared {@link Request}.
+     * @return The filtered request with added context information in headers.
+     */
     @Override
     default Request filter(Request request) {
         ThreadContext context = new ThreadContext();
@@ -32,7 +49,7 @@ public interface ContextToHeaderForwarder extends PreExchangeExecutionFilter, Cl
 
         HttpHeaders headers = request.getHeaders();
 
-        for (FlowCapturer capturer : getForwardedProperties()) {
+        for (FlowCaptor capturer : getForwardedProperties()) {
             String value = (String) capturer.apply(requestView);
             headers.addIfAbsent(capturer.getHeaderName(), value);
         }
@@ -40,5 +57,10 @@ public interface ContextToHeaderForwarder extends PreExchangeExecutionFilter, Cl
         return request;
     }
 
-    List<FlowCapturer> getForwardedProperties();
+    /**
+     * Retrieves the list of {@link FlowCaptor} instances defining the properties to be forwarded as headers.
+     *
+     * @return The list of forwarded properties captors.
+     */
+    List<FlowCaptor> getForwardedProperties();
 }

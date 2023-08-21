@@ -1,5 +1,6 @@
 package com.sylvona.leona.mvc.client;
 
+import com.sylvona.leona.mvc.components.MvcLeonaConstants;
 import com.sylvona.leona.mvc.components.containers.Context;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpRequest;
@@ -14,7 +15,7 @@ final class ExecutionDurationRequestInterceptor implements ClientHttpRequestInte
     private Context clientContext;
 
     @Override
-    public ClientHttpResponse intercept(@NotNull HttpRequest request, @NotNull byte[] body, @NotNull ClientHttpRequestExecution execution) throws IOException {
+    public @NotNull ClientHttpResponse intercept(@NotNull HttpRequest request, byte @NotNull [] body, @NotNull ClientHttpRequestExecution execution) throws IOException {
         long startNanos = System.nanoTime();
         try {
             ClientHttpResponse response = execution.execute(request, body);
@@ -27,7 +28,7 @@ final class ExecutionDurationRequestInterceptor implements ClientHttpRequestInte
     }
 
     @Override
-    public void onInitialize(ClientExecuter.Modifier clientModifier) {
+    public void onInitialize(RestClient.Modifier clientModifier) {
         clientContext = clientModifier.getContext();
 
         clientModifier.modifyRestTemplate(restTemplate -> {

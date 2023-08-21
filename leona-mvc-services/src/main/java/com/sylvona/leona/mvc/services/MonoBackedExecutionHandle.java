@@ -19,6 +19,7 @@ class MonoBackedExecutionHandle<T> implements AsyncExecutionHandle<T> {
     private final Context context;
     private Supplier<T> executable;
     private Mono<MutableServiceExecutionResult<T>> mono;
+    private MutableServiceExecutionResult<T> result;
 
     MonoBackedExecutionHandle(Supplier<T> executable, List<ServiceExecutionFilter> executionFilters, ServiceMetadata serviceMetadata, Context context) {
         this(executionFilters, serviceMetadata, new SimpleContext(new ThreadAwareMap<>(context)));
@@ -96,8 +97,18 @@ class MonoBackedExecutionHandle<T> implements AsyncExecutionHandle<T> {
     }
 
     @Override
+    public T cached(Function<ExecutionView<T>, T> resolver) {
+        return result != null ? resolver.apply(result) : get(resolver);
+    }
+
+    @Override
+    public T cached() {
+        return result != null ? result.result() : get();
+    }
+
+    @Override
     public T get(Function<ExecutionView<T>, T> resolver) {
-        return mono.map(resolver).block();
+        return mono.map(r -> resolver.apply(result = r)).block();
     }
 
     @Override

@@ -47,7 +47,7 @@ class LeonaServiceAutoConfiguration {
     @ConditionalOnMissingBean(ServiceLogger.class)
     public ServiceLogger defaultServiceLogger(ServiceAutoConfigurationSource configurationSource) {
         LoggerConfiguration loggerConfiguration = configurationSource.getLogging();
-        if (loggerConfiguration.getClientLogger() != null) return applicationContext.getBean(loggerConfiguration.getClientLogger());
+        if (loggerConfiguration.getLogger() != null) return applicationContext.getBean(loggerConfiguration.getLogger());
         return new DefaultServiceLogger(loggerConfiguration);
     }
 

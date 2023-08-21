@@ -5,7 +5,6 @@ import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.RequestEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponents;
@@ -15,6 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+/**
+ * A simple default implementation of {@link Request}
+ */
 @lombok.Builder(access = AccessLevel.PRIVATE, builderClassName = "CopyBuilder", toBuilder = true)
 public class SimpleRequest implements Request {
     private HttpMethod httpMethod;
@@ -40,17 +42,20 @@ public class SimpleRequest implements Request {
         return uriComponentsBuilder.toUriString();
     }
 
-    RequestEntity.BodyBuilder createRequestBuilder() {
-        return RequestEntity.method(httpMethod, getUriString()).headers(headers);
-    }
-
+    /**
+     * Creates a {@link Request.Builder} based on a {@link UriComponentsBuilder}
+     * @param componentsBuilder a default components builder
+     * @return a preconfigured Builder
+     */
     public static Builder builder(UriComponentsBuilder componentsBuilder) {
         BuilderImpl builderImpl = new BuilderImpl();
         builderImpl.uriComponentsBuilder = componentsBuilder;
         return builderImpl;
     }
 
-
+    /**
+     * A simple default implementation of {@link Builder}
+     */
     @Accessors(fluent = true)
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)

@@ -16,7 +16,7 @@ import java.time.Duration;
 @Setter(AccessLevel.PACKAGE)
 @RequiredArgsConstructor
 class RestClientExecution implements ClientExecutionView {
-    private final ClientExecuter client;
+    private final RestClient client;
     private final Request request;
     private final ContextView context;
     private Duration executionTime;

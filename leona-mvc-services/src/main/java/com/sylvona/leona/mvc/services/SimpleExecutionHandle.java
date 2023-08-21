@@ -13,6 +13,7 @@ class SimpleExecutionHandle<T> implements SynchronousExecutionHandle<T> {
     private final List<ServiceExecutionFilter> executionFilters;
     private final ServiceMetadata serviceMetadata;
     private final Context context;
+    private MutableServiceExecutionResult<T> result;
 
     SimpleExecutionHandle(Supplier<T> executable, List<ServiceExecutionFilter> executionFilters, ServiceMetadata serviceMetadata) {
         this.executable = executable;
@@ -22,8 +23,18 @@ class SimpleExecutionHandle<T> implements SynchronousExecutionHandle<T> {
     }
 
     @Override
+    public T cached(Function<ExecutionView<T>, T> resolver) {
+        return result != null ? resolver.apply(result) : get(resolver);
+    }
+
+    @Override
+    public T cached() {
+        return result != null ? result.result() : get();
+    }
+
+    @Override
     public T get(Function<ExecutionView<T>, T> resolver) {
-        return execute().result();
+        return resolver.apply(result = execute());
     }
 
     @Override

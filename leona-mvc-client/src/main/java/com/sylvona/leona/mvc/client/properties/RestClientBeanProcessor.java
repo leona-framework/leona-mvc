@@ -20,6 +20,11 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashSet;
 
+/**
+ * BeanPostProcessor implementation that processes RestTemplate beans to inject client properties.
+ * This processor extracts RestClientConfig properties from the environment and associates them
+ * with the RestTemplate instances.
+ */
 @Slf4j
 @Configuration
 public class RestClientBeanProcessor implements BeanPostProcessor {
@@ -29,6 +34,12 @@ public class RestClientBeanProcessor implements BeanPostProcessor {
     private final ApplicationContext applicationContext;
     private final Binder binder;
 
+    /**
+     * Constructs the RestClientBeanProcessor.
+     *
+     * @param applicationContext The Spring ApplicationContext.
+     * @param environment The environment to extract configuration properties from.
+     */
     public RestClientBeanProcessor(ApplicationContext applicationContext, Environment environment) {
         this.applicationContext = applicationContext;
 
@@ -42,6 +53,14 @@ public class RestClientBeanProcessor implements BeanPostProcessor {
         binder = new Binder(sources, resolver, conversionService, null, null, null);
     }
 
+    /**
+     * Processes RestTemplate beans before initialization.
+     *
+     * @param bean The bean instance.
+     * @param beanName The name of the bean.
+     * @return The processed bean.
+     * @throws BeansException If a BeansException occurs during processing.
+     */
     @Override
     public Object postProcessBeforeInitialization(@NotNull Object bean, @NotNull String beanName) throws BeansException {
         if (!(bean instanceof RestTemplate restTemplate)) return bean;
@@ -63,7 +82,6 @@ public class RestClientBeanProcessor implements BeanPostProcessor {
 
         return restTemplate;
     }
-
 
     private RestClientConfig getProperties(String prefix) {
         if (!prefix.startsWith(ClientAutoConfigurationSource.CONFIGURATION_QUALIFIER)) {

@@ -1,19 +1,19 @@
 package com.sylvona.leona.mvc.client;
 
 import com.sylvona.leona.mvc.client.flow.ContextToHeaderForwarder;
-import com.sylvona.leona.mvc.client.flow.FlowCapturer;
+import com.sylvona.leona.mvc.client.flow.FlowCaptor;
 
 import java.util.List;
 
 class DefaultContextToHeaderForwarder implements ContextToHeaderForwarder {
-    private final List<FlowCapturer> forwarderList;
+    private final List<FlowCaptor> forwarderList;
 
-    DefaultContextToHeaderForwarder(List<FlowCapturer> forwarderList) {
+    DefaultContextToHeaderForwarder(List<FlowCaptor> forwarderList) {
         this.forwarderList = forwarderList;
     }
 
     @Override
-    public List<FlowCapturer> getForwardedProperties() {
+    public List<FlowCaptor> getForwardedProperties() {
         return this.forwarderList;
     }
 }

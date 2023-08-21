@@ -1,6 +1,7 @@
 package com.sylvona.leona.mvc.flow;
 
 import com.sylvona.leona.mvc.components.containers.ThreadAware;
+import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AccessLevel;
@@ -13,22 +14,40 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Stores information for an inbound request, including any key-values put into MDC
+ */
 @RequiredArgsConstructor
 public class InterceptedRequestView extends HashMap<String, String> implements ThreadAware {
     private final long startTime;
 
+    /**
+     * The request associated with this view.
+     */
     @Getter
     private final HttpServletRequest request;
 
-    @Getter @Setter(AccessLevel.PACKAGE)
+    /**
+     * The response associated with the inbound request (can be null).
+     */
+    @Nullable @Getter @Setter(AccessLevel.PACKAGE)
     private HttpServletResponse response;
     private Duration executionTime;
 
+    /**
+     * Returns a {@link Duration} representing the amount of time since the inbound-request was intercepted.
+     * @return the {@link Duration} since an inbound-request
+     */
     public Duration getElapsedTime() {
         if (executionTime != null) return executionTime;
         return Duration.ofNanos(System.nanoTime() - startTime);
     }
 
+    /**
+     * Returns a {@link Duration} representing the amount of time since the inbound-request was intercepted.
+     * @param finalize if the {@link Duration} should be captured and frozen
+     * @return the {@link Duration} since an inbound-request
+     */
     Duration getElapsedTime(boolean finalize) {
         if (!finalize) return getElapsedTime();
         return executionTime = Duration.ofNanos(System.nanoTime() - startTime);

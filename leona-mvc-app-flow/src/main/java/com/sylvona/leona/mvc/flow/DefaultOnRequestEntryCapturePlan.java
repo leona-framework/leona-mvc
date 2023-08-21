@@ -3,8 +3,9 @@ package com.sylvona.leona.mvc.flow;
 import com.sylvona.leona.mvc.components.EventType;
 import com.sylvona.leona.mvc.components.MdcLoggingConstants;
 import com.sylvona.leona.mvc.components.captures.CaptureElement;
+import com.sylvona.leona.mvc.components.captures.Captor;
 import com.sylvona.leona.mvc.components.captures.DefaultCapturePlan;
-import com.sylvona.leona.mvc.components.captures.PersistentCapturer;
+import com.sylvona.leona.mvc.components.captures.PersistentCaptor;
 import io.micrometer.tracing.Span;
 import io.micrometer.tracing.brave.bridge.BraveTracer;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,8 +29,8 @@ class DefaultOnRequestEntryCapturePlan extends DefaultCapturePlan<HttpServletReq
     }
 
     @Override
-    public Capturer<HttpServletRequest> persistent(String key) {
-        PersistentCapturer<HttpServletRequest> capturer = new PersistentCapturer<>(this, true);
+    public Captor<HttpServletRequest> persistent(String key) {
+        PersistentCaptor<HttpServletRequest> capturer = new PersistentCaptor<>(this, true);
         getCaptures().add(new CaptureElement<>(capturer, key));
         return capturer;
     }

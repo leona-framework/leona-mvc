@@ -1,6 +1,6 @@
 package com.sylvona.leona.mvc.client.retry;
 
-import com.sylvona.leona.mvc.client.ClientExecuter;
+import com.sylvona.leona.mvc.client.RestClient;
 import com.sylvona.leona.mvc.client.ClientExecutionView;
 import com.sylvona.leona.mvc.client.Request;
 import com.sylvona.leona.mvc.components.containers.ContextView;
@@ -12,7 +12,7 @@ import java.time.Duration;
 record ClientEchoedRetryView(ClientExecutionView view, RetryOnRetryEvent event, Retryer retryer) implements RetryView {
 
     @Override
-    public ClientExecuter client() {
+    public RestClient client() {
         return view.client();
     }
 

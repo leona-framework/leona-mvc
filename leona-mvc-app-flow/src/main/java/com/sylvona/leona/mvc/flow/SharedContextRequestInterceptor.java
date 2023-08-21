@@ -1,8 +1,8 @@
 package com.sylvona.leona.mvc.flow;
 
+import com.sylvona.leona.mvc.components.captures.Captor;
 import com.sylvona.leona.mvc.components.captures.CaptureElement;
-import com.sylvona.leona.mvc.components.captures.CapturePlan;
-import com.sylvona.leona.mvc.components.captures.PersistentCapturer;
+import com.sylvona.leona.mvc.components.captures.PersistentCaptor;
 import com.sylvona.leona.mvc.components.containers.ThreadContext;
 import com.sylvona.leona.mvc.components.utils.ClassConstructor;
 import io.micrometer.tracing.brave.bridge.BraveTracer;
@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
+/**
+ * Request interceptor that captures and logs contextual information about incoming and outgoing HTTP requests.
+ */
 public class SharedContextRequestInterceptor implements LeonaFlowRequestInterceptor {
     private final Logger log = LoggerFactory.getLogger(LeonaFlowRequestInterceptor.class);
     private final OnRequestEntryCapturePlan entryCapturePlan;
@@ -29,9 +32,17 @@ public class SharedContextRequestInterceptor implements LeonaFlowRequestIntercep
     private final Level level;
     private final BraveTracer tracer;
 
+    /**
+     * Constructs a SharedContextRequestInterceptor instance with provided configuration and capture plans.
+     *
+     * @param requestInterceptorConfig The configuration for the request interceptor.
+     * @param entryCapturePlan The capture plan for incoming requests.
+     * @param exitCapturePlan The capture plan for outgoing responses.
+     * @param tracer The BraveTracer instance for tracing.
+     */
     public SharedContextRequestInterceptor(LeonaFlowAutoConfigurationSource.RequestInterceptorConfig requestInterceptorConfig, OnRequestEntryCapturePlan entryCapturePlan, OnRequestExitCapturePlan exitCapturePlan, BraveTracer tracer) {
         this.tracer = tracer;
-        List<HttpServletRequestCapturer> configCapturers = requestInterceptorConfig.getRequestCapturers();
+        List<HttpServletRequestCaptor> configCapturers = requestInterceptorConfig.getRequestCapturers();
 
         List<CaptureElement<HttpServletRequest>> captureElements = new ArrayList<>(entryCapturePlan.getCaptures());
 
@@ -95,13 +106,13 @@ public class SharedContextRequestInterceptor implements LeonaFlowRequestIntercep
 
         List<MDCCloseable> closeables = new ArrayList<>();
         for (CaptureElement<HttpServletRequest> captureElement : entryCapturePlan.getCaptures()) {
-            CapturePlan.Capturer<HttpServletRequest> capturer = captureElement.capturer();
+            Captor<HttpServletRequest> capturer = captureElement.captor();
             if (!capturer.isCaptureable(request)) continue;
 
-            String key = captureElement.name();
+            String key = captureElement.key();
             String value = Objects.toString(capturer.apply(request));
 
-            if (!(capturer instanceof PersistentCapturer<HttpServletRequest> persistentCapturer) || !persistentCapturer.isPersistent()) {
+            if (!(capturer instanceof PersistentCaptor<HttpServletRequest> persistentCapturer) || !persistentCapturer.isPersistent()) {
                 closeables.add(MDC.putCloseable(key, value));
             } else {
                 requestView.put(key, value);
@@ -114,10 +125,10 @@ public class SharedContextRequestInterceptor implements LeonaFlowRequestIntercep
     private List<MDCCloseable> createExitCloseables(InterceptedRequestView requestView) {
         List<MDCCloseable> closeables = new ArrayList<>();
         for (CaptureElement<InterceptedRequestView> captureElement : exitCapturePlan.getCaptures()) {
-            CapturePlan.Capturer<InterceptedRequestView> capturer = captureElement.capturer();
+            Captor<InterceptedRequestView> capturer = captureElement.captor();
             if (!capturer.isCaptureable(requestView)) continue;
 
-            String key = captureElement.name();
+            String key = captureElement.key();
             String value = Objects.toString(capturer.apply(requestView));
             closeables.add(MDC.putCloseable(key, value));
         }

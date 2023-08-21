@@ -7,26 +7,58 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+/**
+ * A specialized implementation of the {@link HashMap} class that is thread-aware.
+ * This class maintains a list of thread change listeners and checks that operations
+ * on the map are performed within the context of the same thread, notifying listeners if the thread has changed.
+ *
+ * @param <TKey> The type of keys maintained by this map.
+ * @param <TValue> The type of mapped values.
+ */
 public class ThreadAwareMap<TKey, TValue> extends HashMap<TKey, TValue> {
     private final List<Consumer<? super ThreadAwareMap<TKey, TValue>>> threadChangeListeners = new ArrayList<>();
     private final ReentrantLock checkThreadLock = new ReentrantLock(true);
     private long lastThreadId = Thread.currentThread().getId();
 
+    /**
+     * Constructs a new thread-aware map with the specified initial capacity and load factor.
+     *
+     * @param initialCapacity The initial capacity of the map.
+     * @param loadFactor The load factor of the map.
+     */
     public ThreadAwareMap(int initialCapacity, float loadFactor) {
         super(initialCapacity, loadFactor);
     }
 
+    /**
+     * Constructs a new thread-aware map with the specified initial capacity.
+     *
+     * @param initialCapacity The initial capacity of the map.
+     */
     public ThreadAwareMap(int initialCapacity) {
         super(initialCapacity);
     }
 
+    /**
+     * Constructs a new thread-aware map with default initial capacity and load factor.
+     */
     public ThreadAwareMap() {
     }
 
+    /**
+     * Constructs a new thread-aware map with the same mappings as the specified map.
+     *
+     * @param m The map whose mappings are to be placed in this map.
+     */
     public ThreadAwareMap(Map<? extends TKey, ? extends TValue> m) {
         super(m);
     }
 
+    /**
+     * Adds a listener to be notified of changes in the map due to thread switches.
+     *
+     * @param changeListener The consumer to be notified of thread changes.
+     */
     public void addListener(Consumer<? super ThreadAwareMap<TKey, TValue>> changeListener) {
         threadChangeListeners.add(changeListener);
     }

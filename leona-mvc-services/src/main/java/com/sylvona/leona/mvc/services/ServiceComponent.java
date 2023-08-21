@@ -12,19 +12,44 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public interface MetadataHolder extends ApplicationContextAware {
-    Map<Class<?>, ServiceMetadataProvider> METADATA_PROVIDERS = new HashMap<>();
-    Map<Class<?>, ServiceMetadata> METADATA = new HashMap<>();
+/**
+ * A utility interface used by the {@link AsyncService} and {@link SynchronousService} interfaces to help manage
+ * the metadata and filters of their implementers.
+ *
+ * @see AsyncService
+ * @see SynchronousService
+ */
+public interface ServiceComponent extends ApplicationContextAware {
+    /**
+     * A map containing metadata providers of each implementer of this interface.
+     */
+    Map<Class<? extends ServiceComponent>, ServiceMetadataProvider> METADATA_PROVIDERS = new HashMap<>();
+    /**
+     * A meta containing the metadata of each implementer of this interface.
+     */
+    Map<Class<? extends ServiceComponent>, ServiceMetadata> METADATA = new HashMap<>();
+
+    /**
+     * Returns the metadata for the implementing service.
+     *
+     * @param metadataProvider a useful builder class for constructing service metadata.
+     * @return the metadata for the implementing service.
+     */
     default ServiceMetadata metadata(ServiceMetadataProvider metadataProvider) {
         return metadataProvider.defaults();
     }
 
-    static ServiceMetadata getMetadataFor(MetadataHolder service) {
-        Class<?> cls = service.getClass();
+    /**
+     * Returns the metadata associated with a given service.
+     * @param service an implementation of {@link ServiceComponent}.
+     * @return the metadata for the given service.
+     */
+    static ServiceMetadata getMetadataFor(ServiceComponent service) {
+        Class<? extends ServiceComponent> cls = service.getClass();
         ServiceMetadata metadata = METADATA.get(cls);
         if (metadata != null) return metadata;
 
-        LeonaService serviceAnnotation = cls.getDeclaredAnnotation(LeonaService.class);
+        MetaService serviceAnnotation = cls.getDeclaredAnnotation(MetaService.class);
         if (serviceAnnotation != null) {
             String serviceName = serviceAnnotation.name();
             String executionTarget = serviceAnnotation.target();
@@ -40,7 +65,12 @@ public interface MetadataHolder extends ApplicationContextAware {
         return service.metadata(metadataProvider);
     }
 
-    static List<ServiceExecutionFilter> getExecutionFilters(MetadataHolder service) {
+    /**
+     * Returns the list of execution filters associated with a service.
+     * @param service an implementation of {@link ServiceComponent}
+     * @return the list of execution filters associated with the service.
+     */
+    static List<ServiceExecutionFilter> getExecutionFilters(ServiceComponent service) {
         ServiceMetadataProvider provider = METADATA_PROVIDERS.get(service.getClass());
         if (provider == null) return new ArrayList<>();
         ServiceExecutionFilterRepository filterRepository = provider.getExecutionFilterRepository();

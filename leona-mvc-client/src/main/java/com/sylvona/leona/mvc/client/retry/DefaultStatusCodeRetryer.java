@@ -1,7 +1,7 @@
 package com.sylvona.leona.mvc.client.retry;
 
 import com.google.common.collect.Sets;
-import com.sylvona.leona.mvc.client.ClientExecuter;
+import com.sylvona.leona.mvc.client.RestClient;
 import com.sylvona.leona.mvc.client.properties.Resilience4JClientRetryConfig;
 import com.sylvona.leona.mvc.client.ClientExecutionView;
 import com.sylvona.leona.mvc.client.PostExchangeExecutionFilter;
@@ -53,7 +53,7 @@ class DefaultStatusCodeRetryer implements StatusCodeRetryer, PostExchangeExecuti
     }
 
     @Override
-    public void onInitialize(ClientExecuter.Modifier clientModifier) {
+    public void onInitialize(RestClient.Modifier clientModifier) {
         logger.setLogger(clientModifier.getLogger());
 
         Resilience4JClientRetryConfig resilience4JClientRetryConfig = clientModifier.getClient().getConfig().getRetry();
