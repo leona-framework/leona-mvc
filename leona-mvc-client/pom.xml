@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>leona-mvc-client</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<name>leona-mvc-client</name>
 	<description>Library focusing on providing configurable client classes for simplifying RESTful API design</description>
 	<url>https://github.com/leona-framework/leona-mvc</url>
@@ -39,7 +39,7 @@
 	<parent>
 		<groupId>com.sylvona.leona</groupId>
 		<artifactId>leona-mvc-parent</artifactId>
-		<version>0.0.2</version>
+		<version>0.0.3</version>
 		<relativePath>../leona-mvc-parent/pom.xml</relativePath> <!-- lookup parent from repository -->
 	</parent>
 
@@ -72,6 +72,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
 		</dependency>
     </dependencies>
 </project>

@@ -1,6 +1,6 @@
 package com.sylvona.leona.mvc.services;
 
-import com.sylvona.leona.mvc.components.containers.Either;
+import com.sylvona.leona.core.commons.containers.Either;
 import com.sylvona.leona.mvc.components.containers.ExecutionView;
 import reactor.core.publisher.Mono;
 
