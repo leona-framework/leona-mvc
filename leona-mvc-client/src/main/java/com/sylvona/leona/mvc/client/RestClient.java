@@ -157,7 +157,7 @@ public abstract class RestClient implements ApplicationContextAware {
         UriComponentsBuilder componentsBuilder = UriComponentsBuilder.fromUriString(config.getHost()).path(config.getPath());
         Integer port = config.getPort();
         if (port != null) componentsBuilder.port(port);
-        return SimpleRequest.builder(componentsBuilder).httpMethod(config.httpMethod()).build();
+        return SimpleRequest.builder(componentsBuilder).httpMethod(config.httpMethod()).headers(config.getHeaders()).build();
     }
 
 
