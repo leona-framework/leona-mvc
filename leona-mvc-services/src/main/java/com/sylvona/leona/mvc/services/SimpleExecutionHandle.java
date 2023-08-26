@@ -1,6 +1,8 @@
 package com.sylvona.leona.mvc.services;
 
 import com.sylvona.leona.core.commons.containers.Either;
+import com.sylvona.leona.core.commons.containers.ExecutionView;
+import com.sylvona.leona.core.commons.containers.Tuple;
 import com.sylvona.leona.mvc.components.containers.*;
 import reactor.core.publisher.Mono;
 
@@ -30,7 +32,7 @@ class SimpleExecutionHandle<T> implements SynchronousExecutionHandle<T> {
 
     @Override
     public T cached() {
-        return result != null ? result.result() : get();
+        return result != null ? result.left() : get();
     }
 
     @Override
@@ -66,7 +68,7 @@ class SimpleExecutionHandle<T> implements SynchronousExecutionHandle<T> {
 
     @Override
     public Mono<T> toMono() {
-        return Mono.fromSupplier(this::execute).map(Either::result);
+        return Mono.fromSupplier(this::execute).map(Either::left);
     }
 
     protected MutableServiceExecutionResult<T> execute() {

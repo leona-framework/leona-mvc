@@ -14,7 +14,7 @@ class MdcServiceCaptures extends DefaultCapturePlan<ServiceExecutionView<?>> imp
         execution(MdcLoggingConstants.BACKEND_NAME).capture(sev -> sev.metadata().serviceName());
         execution(MdcLoggingConstants.EVENT_TYPE).capture(i -> EventType.SERVICE);
         execution(MdcLoggingConstants.RESPONSE_TIME).capture(i -> i.executionTime().toMillis());
-        execution(MdcLoggingConstants.STATUS_CODE).capture(i -> i.isError() ? ERROR_STATUS_CODE :OK_STATUS_CODE);
+        execution(MdcLoggingConstants.STATUS_CODE).capture(i -> i.hasRight() ? ERROR_STATUS_CODE :OK_STATUS_CODE);
         contingent(MdcLoggingConstants.EXECUTION_TARGET)
                 .condition(sev -> sev.metadata().executionTarget() != null)
                 .capture(sev -> sev.metadata().executionTarget());

@@ -1,7 +1,7 @@
 package com.sylvona.leona.mvc.client;
 
 import com.sylvona.leona.mvc.components.containers.ContextView;
-import com.sylvona.leona.mvc.components.containers.ExecutionView;
+import com.sylvona.leona.core.commons.containers.ExecutionView;
 import org.springframework.http.ResponseEntity;
 
 /**

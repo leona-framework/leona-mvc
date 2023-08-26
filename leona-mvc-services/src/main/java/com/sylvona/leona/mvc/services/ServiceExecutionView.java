@@ -1,7 +1,7 @@
 package com.sylvona.leona.mvc.services;
 
 import com.sylvona.leona.mvc.components.containers.Context;
-import com.sylvona.leona.mvc.components.containers.ExecutionView;
+import com.sylvona.leona.core.commons.containers.ExecutionView;
 
 /**
  * An interface representing a view of the execution of a service method.

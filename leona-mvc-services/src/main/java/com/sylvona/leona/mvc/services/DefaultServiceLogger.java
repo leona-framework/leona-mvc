@@ -1,6 +1,6 @@
 package com.sylvona.leona.mvc.services;
 
-import com.sylvona.leona.mvc.components.containers.ExecutionView;
+import com.sylvona.leona.core.commons.containers.ExecutionView;
 import com.sylvona.leona.mvc.components.utils.ClassConstructor;
 import com.sylvona.leona.mvc.services.logging.LoggerConfiguration;
 import com.sylvona.leona.mvc.services.logging.MdcAwareServiceLogger;
@@ -40,7 +40,7 @@ class DefaultServiceLogger implements MdcAwareServiceLogger {
 
         Optional<Function<ExecutionView<?>, String>> messageProvider = executionView.context().getOrEmpty("LOGGING_PROVIDER");
 
-        if (executionView.isError()) executionView.metadata().logger().error("Encountered exception", executionView.error());
+        if (executionView.hasRight()) executionView.metadata().logger().error("Encountered exception", executionView.right());
         else if (messageProvider.isPresent()) executionView.metadata().logger().atLevel(level).log(messageProvider.get().apply(executionView));
         else executionView.metadata().logger().atLevel(level).log(message.apply(executionView));
     }
