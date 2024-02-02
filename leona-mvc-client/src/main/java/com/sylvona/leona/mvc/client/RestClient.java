@@ -19,11 +19,14 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.Duration;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
@@ -157,7 +160,11 @@ public abstract class RestClient implements ApplicationContextAware {
         UriComponentsBuilder componentsBuilder = UriComponentsBuilder.fromUriString(config.getHost()).path(config.getPath());
         Integer port = config.getPort();
         if (port != null) componentsBuilder.port(port);
-        return SimpleRequest.builder(componentsBuilder).httpMethod(config.httpMethod()).headers(config.getHeaders()).build();
+        MultiValueMap<String, String> headers = config.getHeaders();
+        return SimpleRequest.builder(componentsBuilder)
+                .httpMethod(config.httpMethod())
+                .headers(Objects.requireNonNullElseGet(headers, LinkedMultiValueMap::new))
+                .build();
     }
 
 
