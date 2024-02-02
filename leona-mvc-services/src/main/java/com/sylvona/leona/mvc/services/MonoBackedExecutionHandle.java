@@ -1,5 +1,8 @@
 package com.sylvona.leona.mvc.services;
 
+import com.sylvona.leona.core.commons.containers.Either;
+import com.sylvona.leona.core.commons.containers.ExecutionView;
+import com.sylvona.leona.core.commons.containers.Tuple;
 import com.sylvona.leona.mvc.components.containers.*;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Signal;
@@ -103,7 +106,7 @@ class MonoBackedExecutionHandle<T> implements AsyncExecutionHandle<T> {
 
     @Override
     public T cached() {
-        return result != null ? result.result() : get();
+        return result != null ? result.left() : get();
     }
 
     @Override
@@ -118,7 +121,7 @@ class MonoBackedExecutionHandle<T> implements AsyncExecutionHandle<T> {
 
     @Override
     public Mono<T> toMono() {
-        return mono.map(Either::result);
+        return mono.map(Either::left);
     }
 
     private Mono<MutableServiceExecutionResult<T>> setupMono(Supplier<Mono<Supplier<T>>> monoSupplier) {

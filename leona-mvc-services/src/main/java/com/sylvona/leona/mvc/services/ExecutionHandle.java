@@ -1,7 +1,7 @@
 package com.sylvona.leona.mvc.services;
 
-import com.sylvona.leona.mvc.components.containers.Either;
-import com.sylvona.leona.mvc.components.containers.ExecutionView;
+import com.sylvona.leona.core.commons.containers.Either;
+import com.sylvona.leona.core.commons.containers.ExecutionView;
 import reactor.core.publisher.Mono;
 
 import java.util.function.Function;
@@ -44,7 +44,7 @@ public interface ExecutionHandle<T> {
     /**
      * Immediately executes the deferred function, emitting an {@link ExecutionView} to a resolver, before returning the resolved result.
      * <p>
-     * If manipulation of the {@link ExecutionView} is unnecessary, it's preferable to call {@link #get()} or to use {@link Either#result()}
+     * If manipulation of the {@link ExecutionView} is unnecessary, it's preferable to call {@link #get()} or to use {@link Either#left()}
      * to extract only the result.
      * <p>
      * Note: This function invokes the deferred function every time it's called. For a cached approach, use any of the {@link #cached()} methods.
@@ -62,7 +62,7 @@ public interface ExecutionHandle<T> {
      * @return The result of the deferred function.
      */
     default T get() {
-        return get(Either::result);
+        return get(Either::left);
     }
 
     /**

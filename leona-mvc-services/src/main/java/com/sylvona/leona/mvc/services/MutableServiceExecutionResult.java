@@ -41,12 +41,12 @@ class MutableServiceExecutionResult<T> implements ServiceExecutionView<T> {
     }
 
     @Override
-    public boolean isError() {
+    public boolean hasRight() {
         return isError;
     }
 
     @Override
-    public boolean isSuccess() {
+    public boolean hasLeft() {
         return !isError;
     }
 

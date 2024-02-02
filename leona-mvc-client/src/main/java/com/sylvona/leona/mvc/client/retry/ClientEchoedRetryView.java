@@ -42,17 +42,22 @@ record ClientEchoedRetryView(ClientExecutionView view, RetryOnRetryEvent event, 
     }
 
     @Override
+    public Throwable right() {
+        return view.right();
+    }
+
+    @Override
+    public Duration executionTime() {
+        return view.executionTime();
+    }
+
+    @Override
     public ResponseEntity<?> result() {
         return view.result();
     }
 
     @Override
     public Throwable error() {
-        return view.error();
-    }
-
-    @Override
-    public Duration executionTime() {
-        return view.executionTime();
+        return null;
     }
 }
