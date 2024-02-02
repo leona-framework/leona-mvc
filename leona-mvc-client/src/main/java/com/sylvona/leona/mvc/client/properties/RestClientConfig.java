@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.util.MultiValueMap;
 
 import java.time.Duration;
 
@@ -77,6 +78,9 @@ public class RestClientConfig {
 
     /** The "Content-Type" header value for the client request. */
     private String contentType;
+
+    /** The default headers used in requests made by this client. */
+    private MultiValueMap<String, String> headers;
 
     /** The configuration for client timeout properties. */
     @NotNull

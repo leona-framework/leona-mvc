@@ -42,7 +42,7 @@ public abstract class GenericRestClient extends RestClient {
      * @param <TResponse> the expected response type.
      * @return The ResponseEntity containing the response.
      */
-    protected final <TResponse> ResponseEntity<?> send(Class<TResponse> responseClass) {
+    protected final <TResponse> ResponseEntity<TResponse> send(Class<TResponse> responseClass) {
         return send(ParameterizedTypeReference.forType(responseClass));
     }
 
@@ -53,7 +53,7 @@ public abstract class GenericRestClient extends RestClient {
      * @param <TResponse> the expected response type.
      * @return The ResponseEntity containing the response.
      */
-    protected final <TResponse> ResponseEntity<?> send(ParameterizedTypeReference<TResponse> responseTypeReference) {
+    protected final <TResponse> ResponseEntity<TResponse> send(ParameterizedTypeReference<TResponse> responseTypeReference) {
         return send(responseTypeReference, REQUEST_BUILDER);
     }
 
@@ -66,7 +66,7 @@ public abstract class GenericRestClient extends RestClient {
      * @param <TResponse> the expected response type.
      * @return The ResponseEntity containing the response.
      */
-    protected final <TRequest, TResponse> ResponseEntity<?> send(Class<TResponse> responseClass, TRequest requestBody) {
+    protected final <TRequest, TResponse> ResponseEntity<TResponse> send(Class<TResponse> responseClass, TRequest requestBody) {
         return send(ParameterizedTypeReference.forType(responseClass), requestBody);
     }
 
@@ -79,7 +79,7 @@ public abstract class GenericRestClient extends RestClient {
      * @param <TResponse> the expected response type.
      * @return The ResponseEntity containing the response.
      */
-    protected final <TRequest, TResponse> ResponseEntity<?> send(ParameterizedTypeReference<TResponse> responseTypeReference, TRequest requestBody) {
+    protected final <TRequest, TResponse> ResponseEntity<TResponse> send(ParameterizedTypeReference<TResponse> responseTypeReference, TRequest requestBody) {
         return send(responseTypeReference, REQUEST_BUILDER, requestBody);
     }
 
@@ -118,7 +118,7 @@ public abstract class GenericRestClient extends RestClient {
      * @param <TResponse> the expected response type.
      * @return The ResponseEntity containing the response.
      */
-    protected final <TRequest, TResponse> ResponseEntity<?> send(Class<TResponse> responseClass, RequestBuilder requestBuilder, TRequest requestBody) {
+    protected final <TRequest, TResponse> ResponseEntity<TResponse> send(Class<TResponse> responseClass, RequestBuilder requestBuilder, TRequest requestBody) {
         return send(ParameterizedTypeReference.forType(responseClass), requestBuilder, requestBody);
     }
 
@@ -132,7 +132,7 @@ public abstract class GenericRestClient extends RestClient {
      * @param <TResponse> the expected response type.
      * @return The ResponseEntity containing the response.
      */
-    protected final <TRequest, TResponse> ResponseEntity<?> send(ParameterizedTypeReference<TResponse> responseTypeReference, RequestBuilder requestBuilder, TRequest requestBody) {
+    protected final <TRequest, TResponse> ResponseEntity<TResponse> send(ParameterizedTypeReference<TResponse> responseTypeReference, RequestBuilder requestBuilder, TRequest requestBody) {
         Request request = requestBuilder.build(preconfiguredRequestEntity.asBuilder());
         return execute(request, rb -> rb.accept(clientConfig.acceptType())
                 .contentType(clientConfig.getContentMedia())

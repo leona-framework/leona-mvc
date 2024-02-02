@@ -1,7 +1,7 @@
 package com.sylvona.leona.mvc.services;
 
-import com.sylvona.leona.mvc.components.containers.ExecutionView;
-import com.sylvona.leona.mvc.components.containers.Tuple;
+import com.sylvona.leona.core.commons.containers.ExecutionView;
+import com.sylvona.leona.core.commons.containers.Tuple;
 
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;

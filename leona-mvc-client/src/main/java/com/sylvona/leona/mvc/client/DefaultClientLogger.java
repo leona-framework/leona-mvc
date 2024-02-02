@@ -37,7 +37,7 @@ class DefaultClientLogger implements MdcAwareClientLogger {
     @Override
     public void log(ClientExecutionView executionView) {
         if (!predicate.test(executionView)) return;
-        if (executionView.isError()) logger.error("Encountered exception", executionView.error());
+        if (executionView.hasRight()) logger.error("Encountered exception", executionView.right());
         else logger.atLevel(level).log(message.apply(executionView));
     }
 

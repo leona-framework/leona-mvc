@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>leona-mvc</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<name>leona-mvc</name>
 	<description>Provides a simple maven dependency that contains all leona-mvc libraries</description>
 	<url>https://github.com/leona-framework/leona-mvc</url>
@@ -29,7 +29,7 @@
 	<parent>
 		<groupId>com.sylvona.leona</groupId>
 		<artifactId>leona-mvc-parent</artifactId>
-		<version>0.0.2</version>
+		<version>0.0.3</version>
 		<relativePath>/leona-mvc-parent/pom.xml</relativePath> <!-- lookup parent from repository -->
 	</parent>
 
