@@ -4,10 +4,7 @@ import com.sylvona.leona.mvc.components.containers.ThreadAware;
 import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.jboss.logging.MDC;
 
 import java.time.Duration;
@@ -20,17 +17,13 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class InterceptedRequestView extends HashMap<String, String> implements ThreadAware {
     private final long startTime;
-
     /**
      * The request associated with this view.
      */
-    @Getter
     private final HttpServletRequest request;
-
     /**
      * The response associated with the inbound request (can be null).
      */
-    @Nullable @Getter @Setter(AccessLevel.PACKAGE)
     private HttpServletResponse response;
     private Duration executionTime;
 
@@ -58,5 +51,23 @@ public class InterceptedRequestView extends HashMap<String, String> implements T
         for (Map.Entry<String, String> persistentEntries : entrySet()) {
             MDC.put(persistentEntries.getKey(), persistentEntries.getValue());
         }
+    }
+
+    /**
+     * The request associated with this view.
+     */
+    public HttpServletRequest getRequest() {
+        return request;
+    }
+
+    /**
+     * The response associated with the inbound request (can be null).
+     */
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    void setResponse(@Nullable HttpServletResponse httpServletResponse) {
+        this.response = httpServletResponse;
     }
 }
