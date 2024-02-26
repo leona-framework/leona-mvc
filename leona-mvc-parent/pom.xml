@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>leona-mvc-parent</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 	<name>leona-mvc-parent</name>
 	<description>Parent for MVC-based leona libraries</description>
 	<packaging>pom</packaging>
@@ -40,19 +40,19 @@
 	<properties>
 		<java.version>17</java.version>
 		<spring.version>3.1.2</spring.version>
-		<leona-mvc-app-flow.version>0.0.3</leona-mvc-app-flow.version>
-		<leona-mvc-client.version>0.0.3</leona-mvc-client.version>
-		<leona-mvc-components.version>0.0.3</leona-mvc-components.version>
-		<leona-mvc-observability.version>0.0.3</leona-mvc-observability.version>
-		<leona-mvc-services.version>0.0.3</leona-mvc-services.version>
-		<leona-mvc-testing.version>0.0.3</leona-mvc-testing.version>
-		<leona-core.version>0.0.3</leona-core.version>
+		<leona-mvc-app-flow.version>0.0.4</leona-mvc-app-flow.version>
+		<leona-mvc-client.version>0.0.4</leona-mvc-client.version>
+		<leona-mvc-components.version>0.0.4</leona-mvc-components.version>
+		<leona-mvc-observability.version>0.0.4</leona-mvc-observability.version>
+		<leona-mvc-services.version>0.0.4</leona-mvc-services.version>
+		<leona-mvc-testing.version>0.0.4</leona-mvc-testing.version>
+		<leona-core.version>0.0.4</leona-core.version>
 	</properties>
 
 	<parent>
 		<groupId>com.sylvona.leona</groupId>
 		<artifactId>leona-core-parent</artifactId>
-		<version>0.0.3</version>
+		<version>0.0.4</version>
 		<relativePath>../../leona-core/leona-core-parent/pom.xml</relativePath> <!-- lookup parent from repository -->
 	</parent>
 
